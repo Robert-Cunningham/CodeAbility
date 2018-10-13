@@ -2,17 +2,16 @@ from __future__ import division
 
 import re
 import sys
-import keyboard
 
 from google.cloud import speech
 from google.cloud.speech import enums
 from google.cloud.speech import types
 import pyaudio
 from six.moves import queue
+from threading import Timer
 
 RATE = 16000
 CHUNK = int(RATE / 10)	# 100ms
-phrases = []
 
 class MicrophoneStream(object):
 	def __init__(self, rate, chunk):
@@ -21,6 +20,7 @@ class MicrophoneStream(object):
 
 		self.buff = queue.Queue()
 		self.closed = True
+		self.stop = False
 
 	def __enter__(self):
 		self.audio_interface = pyaudio.PyAudio()
@@ -62,8 +62,16 @@ class MicrophoneStream(object):
 
 			yield b''.join(data)
 
-	def listen_print_loop(self, responses):
+	def stopTimer(self):
+		self.stop = True
+
+	def listen_print_loop(self, responses, time):
 		num_chars_printed = 0
+		phrases = []
+		alternatives = []
+		t = Timer(time, self.stopTimer)
+		t.start()
+		print("now listeing")
 		for response in responses:
 			if not response.results:
 				continue
@@ -83,34 +91,52 @@ class MicrophoneStream(object):
 			else:
 				sys.stdout.write(transcript + overwrite_chars + '\r')
 				phrases.append(transcript)
-				if re.search(r'\b(exit|quit)\b', transcript, re.I):
+				alternatives.append(result.alternatives)
+				if re.search(r'\b(exit|quit)\b', transcript, re.I) or self.stop == True:
 					print("exiting...")
 					break
 				print('\n')
 				num_chars_printed = 0
+		return (phrases, alternatives)
+
+class Listener:
+	def __init__(self):
+		self.phrases = []
+		self.alternatives = []
+
+	def listen(self, time):
+		language_code = 'en-US'
+		client = speech.SpeechClient()
+		config = types.RecognitionConfig(
+			encoding=enums.RecognitionConfig.AudioEncoding.LINEAR16,
+			sample_rate_hertz=RATE,
+			language_code=language_code)
+		streaming_config = types.StreamingRecognitionConfig(
+			config=config,
+			interim_results=True)
+
+		with MicrophoneStream(RATE, CHUNK) as stream:
+			audio_generator = stream.generator()
+			requests = (types.StreamingRecognizeRequest(audio_content=content)
+				for content in audio_generator)
+
+			responses = client.streaming_recognize(streaming_config, requests)
+
+			(self.phrases, self.alternatives) = stream.listen_print_loop(responses, time)
+
+	def getPhrases(self):
+		possibilities = []
+		for a in self.alternatives:
+			alts = []
+			for t in a:
+				alts.append(t.transcript)
+			possibilities.append(alts)
+		return possibilities
 
 def main():
-	language_code = 'en-US'
-	print('Switch to the file you wish to write to then begin talking...')
-	client = speech.SpeechClient()
-	config = types.RecognitionConfig(
-		encoding=enums.RecognitionConfig.AudioEncoding.LINEAR16,
-		sample_rate_hertz=RATE,
-		language_code=language_code)
-	streaming_config = types.StreamingRecognitionConfig(
-		config=config,
-		interim_results=True)
-
-	with MicrophoneStream(RATE, CHUNK) as stream:
-		audio_generator = stream.generator()
-		requests = (types.StreamingRecognizeRequest(audio_content=content)
-			for content in audio_generator)
-
-		responses = client.streaming_recognize(streaming_config, requests)
-
-		stream.listen_print_loop(responses)
-
-	print(phrases)
+	listener = Listener()
+	listener.listen(15.0)
+	possibilities = listener.getPhrases()
 
 if __name__ =='__main__':
 	main()
