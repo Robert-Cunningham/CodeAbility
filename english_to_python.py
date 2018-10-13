@@ -87,4 +87,4 @@ def dump_newlines(str):
 #and 8 plus 6 plus 3
 #""")))
 
-print(english_to_python("if 3 equals 4 then return 4 otherwise if 6 then return 5 else return 7"))
+#print(english_to_python("if 3 equals 4 then return 4 otherwise if 6 then return 5 else return 7"))

@@ -65,13 +65,13 @@ class MicrophoneStream(object):
 	def stopTimer(self):
 		self.stop = True
 
-	def listen_print_loop(self, responses, time):
+	def listen_print_loop(self, responses, time, callback):
 		num_chars_printed = 0
 		phrases = []
 		alternatives = []
 		t = Timer(time, self.stopTimer)
 		t.start()
-		print("now listeing")
+		print("now listening")
 		for response in responses:
 			if not response.results:
 				continue
@@ -83,6 +83,8 @@ class MicrophoneStream(object):
 			transcript = result.alternatives[0].transcript
 
 			overwrite_chars = ' ' * (num_chars_printed - len(transcript))
+
+			callback(transcript)
 
 			if not result.is_final:
 				sys.stdout.write(transcript + overwrite_chars + '\r')
@@ -104,7 +106,7 @@ class Listener:
 		self.phrases = []
 		self.alternatives = []
 
-	def listen(self, time):
+	def listen(self, time, callback):
 		language_code = 'en-US'
 		client = speech.SpeechClient()
 		config = types.RecognitionConfig(
@@ -122,7 +124,7 @@ class Listener:
 
 			responses = client.streaming_recognize(streaming_config, requests)
 
-			(self.phrases, self.alternatives) = stream.listen_print_loop(responses, time)
+			(self.phrases, self.alternatives) = stream.listen_print_loop(responses, time, callback)
 
 	def getPhrases(self):
 		possibilities = []
