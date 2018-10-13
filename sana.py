@@ -2,14 +2,14 @@ import keyboard
 import time
 
 keyboard.press_and_release('ctrl+t')
+time.sleep(.5)
 
 def execute(command,input):
     try:
         if (command == 'code'):
-            keyboard.write('i')
+            keyboard.press_and_release('i')
             keyboard.write(input)
             keyboard.press_and_release('esc')
-            keyboard.press_and_release('enter')
         elif (command == 'jumpline'):
             keyboard.write(input + 'G')
             keyboard.press_and_release('enter')
@@ -33,17 +33,12 @@ def execute(command,input):
             keyboard.write('e')
         elif (command == 'back'):
             keyboard.press_and_release('backspace')
-        elif (command == '\\t'):
+        elif (command == '<tab>'):
            keyboard.press_and_release('tab')
-        elif (command == '\\n'):
+        elif (command == '<newline>'):
             keyboard.press_and_release('enter')
         else:
             keyboard.press_and_release('esc') 
     except:
         pass
     time.sleep(.5)
-
-for c in dict:
-    execute(c,dict[c])
-
-
