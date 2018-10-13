@@ -1,0 +1,37 @@
+?expression: int
+    | sum
+    | call
+    | equals
+    | word
+
+call: "call " function_name " with parameters " tuple
+    | "result of " function_name " with parameters " tuple
+
+list: "list of" expression (" and " expression)*
+    | empty_list
+
+equals: expression " equals " expression
+
+tuple: expression (" and " expression)*
+
+?empty_list: "empty list"
+
+?function_name: word
+
+sum: expression " plus " expression
+
+statement: return_
+    | ifelse
+    | expression
+
+ifelse: "if " expression " then " statement [(" otherwise if " expression " then " statement)*] [" else " statement]
+
+return_: "return " expression
+
+int: NUMBER
+
+?word: WORD
+
+%import common.NUMBER
+%import common.ESCAPED_STRING
+%import common.WORD
