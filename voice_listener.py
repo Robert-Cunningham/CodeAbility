@@ -65,13 +65,13 @@ class MicrophoneStream(object):
 	def stopTimer(self):
 		self.stop = True
 
-	def listen_print_loop(self, responses, time):
+	def listen_print_loop(self, responses, time, callback):
 		num_chars_printed = 0
 		phrases = []
 		alternatives = []
 		t = Timer(time, self.stopTimer)
 		t.start()
-		print("now listeing")
+		print("now listening")
 		for response in responses:
 			if not response.results:
 				continue
@@ -81,16 +81,19 @@ class MicrophoneStream(object):
 				continue
 
 			transcript = result.alternatives[0].transcript
+			#print(result.alternatives)
 
 			overwrite_chars = ' ' * (num_chars_printed - len(transcript))
 
+
 			if not result.is_final:
-				sys.stdout.write(transcript + overwrite_chars + '\r')
-				sys.stdout.flush()
+				#sys.stdout.write(transcript + overwrite_chars + '\r')
+				#sys.stdout.flush()
 				num_chars_printed = len(transcript)
 			else:
-				sys.stdout.write(transcript + overwrite_chars + '\r')
+				#sys.stdout.write(transcript + overwrite_chars + '\r')
 				phrases.append(transcript)
+				callback(transcript)
 				alternatives.append(result.alternatives)
 				if re.search(r'\b(exit|quit)\b', transcript, re.I) or self.stop == True:
 					print("exiting...")
@@ -104,13 +107,15 @@ class Listener:
 		self.phrases = []
 		self.alternatives = []
 
-	def listen(self, time):
+	def listen(self, time, callback):
 		language_code = 'en-US'
-		client = speech.SpeechClient()
+		#client = speech.SpeechClient()
+		client = speech.SpeechClient.from_service_account_json('creds.json')
 		config = types.RecognitionConfig(
 			encoding=enums.RecognitionConfig.AudioEncoding.LINEAR16,
 			sample_rate_hertz=RATE,
 			language_code=language_code,model='command_and_search')
+		
 		streaming_config = types.StreamingRecognitionConfig(
 			config=config,
 			interim_results=True)
@@ -122,7 +127,7 @@ class Listener:
 
 			responses = client.streaming_recognize(streaming_config, requests)
 
-			(self.phrases, self.alternatives) = stream.listen_print_loop(responses, time)
+			(self.phrases, self.alternatives) = stream.listen_print_loop(responses, time, callback)
 
 	def getPhrases(self):
 		possibilities = []
