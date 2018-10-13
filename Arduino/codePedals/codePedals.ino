@@ -11,11 +11,11 @@
  */
 
 //Input pins
-const int num_pedals = 4;
-const int pedal_pins[] = {10, 11, 12, 13};
+const int num_pedals = 5;
+const int pedal_pins[] = {9, 10, 11, 12, 13};
 
 //previous states
-bool lastPedalStates[] = {LOW, LOW, LOW, LOW};
+bool lastPedalStates[] = {LOW, LOW, LOW, LOW, LOW};
 
 void setup() {
   //set inputs
