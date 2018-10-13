@@ -1,3 +1,6 @@
+?start: statement
+    | command
+
 ?expression: int
     | quantity
     | sum
@@ -41,6 +44,12 @@ return_: "return " expression
 int: NUMBER
 
 ?word: WORD
+
+?command: next_word
+    | last_word
+
+?next_word: "next word"
+?last_word: "last word"
 
 %import common.NUMBER
 %import common.ESCAPED_STRING

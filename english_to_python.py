@@ -8,10 +8,16 @@
 
 from lark import Lark, Transformer
 import traceback
+import synonyms
 
 grammar = open('pythonicEnglish.lark').read()
 
-parser = Lark(grammar, start='statement', debug=True)
+parser = Lark(grammar, start='start', debug=True)
+
+def synonymize(text):
+    for (k, v) in synonyms.synonyms.items():
+        text = text.replace(" " + k + " ", " " + v + " ")
+    return text
 
 def list_to_str(l):
     return "[" + ''.join([x + "," for x in l])[:-1] + "]"
@@ -83,15 +89,29 @@ class PythonTransformer(Transformer):
     
     def return_(self, items):
         return "return " + items[0]
+    
+    #------- COMMANDS --------
+
+    def next_word(self, items):
+        return "COMMAND next_word"
+
+    def last_word(self, items):
+        return "COMMAND last_word"
 
 def english_to_python(english):
     try:
+        english = synonymize(english)
         tree = parser.parse(english)
         print(tree.pretty())
         out = PythonTransformer().transform(tree)
-        return out
-    except Exception as e:
-        print(" Does not compile.")
+        if "COMMAND " in out:
+            out = out.replace("COMMAND ", "")
+            return {'command': "command", 'input': out}
+        else:
+            return {'command': "code", 'input': out}
+    except:
+        traceback.print_exc()
+        print("Does not compile.")
         return None
 
 def dump_newlines(str):
