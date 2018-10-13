@@ -1,0 +1,18 @@
+VIM COMMANDS
+
+create [thing]
+	thing = if statement, for loop, while loop
+	(use snippets)
+	next = tab to next field
+
+jump to [thing] / goto [thing]
+	end of [line, file, block] = $, G, }
+	line # = #G
+	next [word] = /word
+	beginning of [line, file, block] = g_, gg, {
+	last word = b
+	next word = e
+
+back = backspace
+
+replace [(next) word] with [word] = ciw
