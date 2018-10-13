@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "code-dictator-hackumass18",
+  "private_key_id": "d823149dfaaafdfc6742a9923bbb62bfb5116257",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQCehBRM8QGhqOP6\n/gU3I/ePOJXIw8+eAcLttuCPg9OSUVkfS33cAmkMWLmnN0RC9EsSKgyDu1WqyDIu\n4En9pPnGedRj9h9OMKINYDv9RZJ0yQT26DzuQxAngypR4izg5XTKbLEF/y5DvTRx\n5GJn617JyKKe1ZcrkOFg9wYKqzDjDS+PJ40EcsKQJszRdPKwT+tuFnRiGwee9tEn\nSg6LYeFoii6tIbGQezTw24JQ+Jsiaomyg2Jo7sorExliJ7z5x3Nx5+7M5Ksmekto\niyhMI95JjBU/ZX9aUayb3TaHh2IUKO4RTMZs/kZDejSvWTIA0Mh+T+bQ/Orl6Fs3\nJRfKdfbTAgMBAAECggEAELgsrfrjqan3NfOSGEFObMhSoCTrIqbb6RfXcru8VpwG\n8vKS+WA1tUwsdNMy+37p5iYSQNjDDerkxCX7F+pNQB58hPiiT6x4g0GpwiqS6oeD\nYwmW16iyLQC8N3vMMQJywaEaQOAsAJAV1od4y647RrxHTsqHkdxLsV8Mv5ZT5zbD\n1OECRTeEVbu8Vj4FQh7vskjudoi2w/cvB9YEkrFkhcwSuXjS/LTo4oUiNfFcaLs7\nCrBEQmdaaPwPa84RALaUuWXF2A65oAwKVq2yNa9sMDYemch20+HWZx5dKNkPDrVf\nvbI4RjEDKCzlwdGBUIFUtQ2Al2lIWz1ZKmzFr2y4lQKBgQDKw4Ewcu+7/DvvjXnX\nP4ed9BKujoCwdCq6SyzpfA38RuKrCvG4ZcH66ukOHnICryf/nJznGFY28kru9xi5\nycDQs0ISJ3D/NcBA2Gsvp2qTTGQVwbhlSd7xUi54h8SRINf9B2gww77adJNWR76L\nyDw4lmlmbA2YZ48SA7zMtafrvwKBgQDIIoUUqGgsgp6p3NhxaRvu2HwR10NC+g/Y\nAwRC0+OLGApW7nB4XDlJvzX1f/+9iWa6+VEfwnQ22HmjSOnWSqaIrF8eCWevK7dh\nB7Uhm5vDQMUDGvoqjNvmC61ckoUjlS1osa2zZyr3GyKSFmDHN98MgyQCoPjivdYr\nV0vF0wkJ7QKBgAy9mCKJNlMjmEiHJT7HOShNq9bYEXIE+qJWEu5g4ygU9C03NNUX\nX8b6d8ZxV0yf4O2I07sZpmExfE/jquQRr1Ht0Zr+a3U91WS9tI58AJBc3nUXhRSo\nPaAAP/dG4K0V2TyG+J8HzbhAVvm27FwwKsiLevf6ligbabwCDBz41SJVAoGBAKjz\n62EbIoag5o0DsX1cfIZQH713+oJqVEHJmilIc4mTC/eDZ1NUl9BYKZdNLXq2qhEi\nNIgZQr6iVV2xSibr8lbjHZFf4zYQM8koFpN+qCpXXXpXpeWR8HnuVbYWw2rcnu8J\nQFh5ud3N/ItTdPP5iMUpWJcXicTw+gKwuXkRxUmpAoGBAKBjtwoo79JqjdgkB3U9\nh9ot+TzCT/vtUVWrACPy5GEINVTxBJqRIH/SFklW8nZ8b/tECYBiDUkbuiLMJTZ5\nNoswB2B4Su5LLGHDb+l1kuHHrxgoAH8wKIXmdr8dVpVBaAF77A8qNxTe1rMJTA5i\nDcz0Foj3Z4KO2Lq1X/J49tPq\n-----END PRIVATE KEY-----\n",
+  "client_email": "code-dictator-hackumass@code-dictator-hackumass18.iam.gserviceaccount.com",
+  "client_id": "105357684435788980121",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/code-dictator-hackumass%40code-dictator-hackumass18.iam.gserviceaccount.com"
+}
