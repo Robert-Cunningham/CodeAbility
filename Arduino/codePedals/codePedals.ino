@@ -3,50 +3,44 @@
  *  Does actions with pedals
  */
 
-
-#include <Keyboard.h>
-
 //Input pins
-#define PEDAL_PIN_1 6
-#define PEDAL_PIN_2 7
-#define PEDAL_PIN_3 4
-#define PEDAL_PIN_4 5
+const int num_pedals = 4;
+const int pedal_pins[] = {6, 7, 8, 9};
 
-//current states
-int pedalState1 = HIGH;
-int pedalState2 = HIGH;
-int pedalState3 = HIGH;
-int pedalState4 = HIGH;
-
-unsigned long debounceDelay = 50;
+//previous states
+bool lastPedalStates[] = {LOW, LOW, LOW, LOW};
 
 void setup() {
   //set inputs
-  pinMode(PEDAL_PIN_1, INPUT_PULLUP);
-  pinMode(PEDAL_PIN_2, INPUT_PULLUP);
-  pinMode(PEDAL_PIN_3, INPUT_PULLUP);
-  pinMode(PEDAL_PIN_4, INPUT_PULLUP);
+  for(pin:pedal_pins) {
+    pinMode(pin, INPUT);
+  }
 
-  Keyboard.begin();
+  Serial.begin(9600);
 }
 
 void loop() {
+  //Read all the buttons
+  bool pedalStates[num_pedals];
 
-  //refresh pedal states
-  int pedalReading1 = digitalRead(PEDAL_PIN_1);
-  int pedalReading2 = digitalRead(PEDAL_PIN_2);
-  int pedalReading3 = digitalRead(PEDAL_PIN_3);
-  int pedalReading4 = digitalRead(PEDAL_PIN_4);
-
-  if(pedalReading1 == LOW) {
-    Keyboard.press(KEY_LEFT_CTRL);
-    Keyboard.press(KEY_LEFT_ALT);
-    Keyboard.press(KEY_UP_ARROW);
-
-    while(pedalReading1 == LOW) {
-      delay(100);
+  for(int i=0; i<num_pedals; i++) {
+    pedalStates[i] = digitalRead(pedal_pins[i]);
+  }
+  
+  for(int i=0; i<num_pedals; i++) {
+    if (pedalStates[i] != lastPedalStates[i]) {
+      if (pedalStates[i] == HIGH) {
+        // if the current state is HIGH then the button went from off to on:
+        Serial.println(i);
+      } else {
+        // if the current state is LOW then the button went from on to off:
+        Serial.println(i+num_pedals);
+      }
+      // Delay a little bit to avoid bouncing
+      delay(50);
     }
-    Keyboard.releaseAll();
+    // save the current state as the last state, for next time through the loop
+    lastPedalStates[i] = pedalStates[i];
   }
 
 }
