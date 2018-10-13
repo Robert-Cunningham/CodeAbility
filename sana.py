@@ -8,22 +8,21 @@ dict = {"code":"import code:\nnext line\tthird line\t\n()"}
 def execute(command,input):
     time.sleep(2)
     if (command == 'code'):
-        keyboard.write('i')
+        keyboard.write('a')
         sp = re.split("(\t|\n|\:)", input)
         for i in sp:
-            if (i == '\\n'):
+            if (i == '\n'):
                 keyboard.press_and_release('enter')
-            elif (i == '\\t'):
-                keyboard.press_and_release(48)
+            elif (i == '\t'):
+                keyboard.press_and_release('esc')
+                keyboard.write('>>')
+                keyboard.write('A')
+                time.sleep(0.5)
             elif (i == ':'):
-                keyboard.press(56)
-                keyboard.press(41)
-                keyboard.release(41)
-                keyboard.release(56)
+                keyboard.write(':')
             else:
                 keyboard.write(i)
         keyboard.press_and_release('esc')
-        keyboard.press_and_release('enter')
     elif (command == 'jumpline'):
         keyboard.write(input + 'G')
         keyboard.press_and_release('enter')
