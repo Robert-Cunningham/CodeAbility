@@ -85,7 +85,6 @@ class MicrophoneStream(object):
 
 			overwrite_chars = ' ' * (num_chars_printed - len(transcript))
 
-			callback(transcript)
 
 			if not result.is_final:
 				#sys.stdout.write(transcript + overwrite_chars + '\r')
@@ -94,6 +93,7 @@ class MicrophoneStream(object):
 			else:
 				#sys.stdout.write(transcript + overwrite_chars + '\r')
 				phrases.append(transcript)
+				callback(transcript)
 				alternatives.append(result.alternatives)
 				if re.search(r'\b(exit|quit)\b', transcript, re.I) or self.stop == True:
 					print("exiting...")
@@ -109,11 +109,13 @@ class Listener:
 
 	def listen(self, time, callback):
 		language_code = 'en-US'
-		client = speech.SpeechClient()
+		#client = speech.SpeechClient()
+		client = speech.SpeechClient.from_service_account_json('creds.json')
 		config = types.RecognitionConfig(
 			encoding=enums.RecognitionConfig.AudioEncoding.LINEAR16,
 			sample_rate_hertz=RATE,
 			language_code=language_code,model='command_and_search')
+		
 		streaming_config = types.StreamingRecognitionConfig(
 			config=config,
 			interim_results=True)
