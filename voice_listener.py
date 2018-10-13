@@ -110,7 +110,7 @@ class Listener:
 		config = types.RecognitionConfig(
 			encoding=enums.RecognitionConfig.AudioEncoding.LINEAR16,
 			sample_rate_hertz=RATE,
-			language_code=language_code)
+			language_code=language_code,model='command_and_search')
 		streaming_config = types.StreamingRecognitionConfig(
 			config=config,
 			interim_results=True)
@@ -131,6 +131,10 @@ class Listener:
 			for t in a:
 				alts.append(t.transcript)
 			possibilities.append(alts)
+
+		# clear phrases and alternatives since they have been fetched
+		self.phrases = []
+		self.alternatives = []
 		return possibilities
 
 def main():
