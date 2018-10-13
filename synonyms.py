@@ -9,7 +9,4 @@ synonyms = {
     'eight': '8',
     'nine': '9',
     'ten': '10',
-
-    'to': '2'
-
 }

@@ -50,13 +50,41 @@ class PythonTransformer(Transformer):
         return str(items[0])
     
     def statement(self, items):
-        return str(items[0])
+        out = ""
+        for i in items:
+            out += "\n" + str(i)
+        
+        return out[1:]
     
     def drv(self, items):
         return str(items[0])
     
     def WORD(self, items):
         return items[0]
+    
+    def lt(self, items):
+        return "<"
+    def gt(self, items):
+        return ">"
+    def lte(self, items):
+        return "<="
+    def gte(self, items):
+        return ">="
+    def eq(self, items):
+        return "=="
+    
+    def length(self, items):
+        return "len(" + items[0] + ")"
+
+    def comparison(self, items):
+        return items[0] + " " + items[1] + " " + items[2]
+    
+    def set_var(self, items):
+        return items[0] + " = " + items[1]
+    
+    def array_element(self, items):
+        return items[1] + "[" + items[0] + "]"
+    
     
     def ifelse(self, items): #if (1) then (2) elif (3) then (4) elif (5) then (6) else (7)
         print(items)
@@ -86,6 +114,12 @@ class PythonTransformer(Transformer):
         
         return "def " + fn + "(" + args + "):\n\t" + body
 
+    def array_comprehension(self, items):
+        print(items)
+        return "[" + items[0] + " for " + items[1] + " in " + items[2] + " if " + items[3] + "]"
+    
+    def end_array_elements(self, items):
+        return items[1] + "[" + items[0] + ":]"
     
     def return_(self, items):
         return "return " + items[0]
@@ -104,6 +138,7 @@ def english_to_python(english):
         tree = parser.parse(english)
         print(tree.pretty())
         out = PythonTransformer().transform(tree)
+        print(out)
         if "COMMAND " in out:
             out = out.replace("COMMAND ", "")
             return {'command': out, 'value': ""}
@@ -140,22 +175,37 @@ else return result of fib of quantity n minus 1 plus result of fib of quantity n
 done
 """
 
-e = """
-
-"""
+test = "x for x in array is greater than 2 if x is less than 3"
+comptest = "x is less than 3"
 
 quick_sort = """
-
+define sort with parameters array and body
+if the length of array is less than or equal to 1 then
+return array
+else
+set pivot to element 0 of array then
+set larger to x for x in elements 1 through end of array if x is greater than pivot then
+set smaller to x for x in elements 1 through end of array if x is less than or equal to pivot then
+return result of sort of smaller plus list of pivot plus result of sort of larger
+done
 """
 
-def quick_sort(ARRAY):
-    if( len(array) <= 1):
+print(english_to_python(dump_newlines(quick_sort)))
+#print(english_to_python(dump_newlines(quick_sort)))
+
+"""
+"""
+
+def q_sort(array):
+    if len(array) <= 1:
         return array
     else:
         pivot = array[0]
-        greater = [ element for element in ARRAY[1:] if element > PIVOT ]
-        lesser = [ element for element in ARRAY[1:] if element <= PIVOT ]
-        return quick_sort(LESSER) + [PIVOT] + quick_sort(GREATER)
+        larger = [ element for element in array[1:] if element > pivot ]
+        smaller = [ element for element in array[1:] if element <= pivot ]
+        return q_sort(smaller) + [pivot] + q_sort(larger)
+
+print(q_sort([-4, 1, -200, 0, 200, -200]))
 
 
 #def e(n=10):
