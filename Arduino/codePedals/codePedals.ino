@@ -1,6 +1,13 @@
 /* VOICE CODE PEDAL CONTROL
  *  relies on atom package "keyboard-scroll"
- *  Does actions with pedals
+ *  Sends characters to Serial at 9600 baud on change in pedal state.
+ *  
+ *  States: 
+ *   -- 0-(num_pedals-1): this index has been pressed
+ *   -- num_pedals - 2*(num_pedals)-1 : (this index - num_pedals) has been released
+ *   
+ *   ex) 2 : pedal number two has been pressed
+ *       4 : pedal zero has been released
  */
 
 //Input pins
