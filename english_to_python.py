@@ -7,10 +7,11 @@
 # expression and expression -> list
 
 from lark import Lark, Transformer
+import traceback
 
 grammar = open('pythonicEnglish.lark').read()
 
-parser = Lark(grammar, start='statement', ambiguity='explicit', debug=True)
+parser = Lark(grammar, start='statement', debug=True)
 
 def list_to_str(l):
     return "[" + ''.join([x + "," for x in l])[:-1] + "]"
@@ -18,6 +19,9 @@ def list_to_str(l):
 class PythonTransformer(Transformer):
     def sum(self, items):
         return items[0] + "+" + items[1]
+
+    def difference(self, items):
+        return items[0] + "-" + items[1]
     
     def int(self, n):
         return str(n[0])
@@ -45,6 +49,9 @@ class PythonTransformer(Transformer):
     def drv(self, items):
         return str(items[0])
     
+    def WORD(self, items):
+        return items[0]
+    
     def ifelse(self, items): #if (1) then (2) elif (3) then (4) elif (5) then (6) else (7)
         print(items)
         out = ""
@@ -66,18 +73,29 @@ class PythonTransformer(Transformer):
     def equals(self, items):
         return items[0] + " == " + items[1]
 
+    def definition(self, items):
+        fn = items[0]
+        args = items[1]
+        body = items[2]
+        
+        return "def " + fn + "(" + args + "):\n\t" + body
+
     
     def return_(self, items):
         return "return " + items[0]
 
 def english_to_python(english):
-    tree = parser.parse(english)
-    print(tree.pretty())
-    out = PythonTransformer().transform(tree)
-    return out
+    try:
+        tree = parser.parse(english)
+        print(tree.pretty())
+        out = PythonTransformer().transform(tree)
+        return out
+    except Exception as e:
+        print(" Does not compile.")
+        return None
 
 def dump_newlines(str):
-    return ' '.join(str.split("\n")).strip()
+    return ' '.join(str.split("\n")).strip().replace("  ", " ")
 
 #print(english_to_python(dump_newlines("""
 #if 3 then
@@ -88,3 +106,18 @@ def dump_newlines(str):
 #""")))
 
 #print(english_to_python("if 3 equals 4 then return 4 otherwise if 6 then return 5 else return 7"))
+
+#def F(n):
+#    if n == 0: return 0
+#    elif n == 1: return 1
+#    else: return F(n-1)+F(n-2)
+
+fib = """
+define fib with parameters n and body 
+if n equals 0 then return 0
+otherwise if n equals 1 then return 1
+else return result of fib with parameters quantity n minus 1 plus result of fib with parameters quantity n minus two
+done
+"""
+
+#print(english_to_python(dump_newlines(fib)))

@@ -1,5 +1,7 @@
 ?expression: int
+    | quantity
     | sum
+    | difference
     | call
     | equals
     | word
@@ -20,9 +22,17 @@ tuple: expression (" and " expression)*
 
 sum: expression " plus " expression
 
+?quantity: "quantity " sum
+    | "quantity " difference
+
+difference: expression " minus " expression
+
+definition: "define " function_name " with parameters " tuple " and body " statement* " done"
+
 statement: return_
     | ifelse
     | expression
+    | definition
 
 ifelse: "if " expression " then " statement [(" otherwise if " expression " then " statement)*] [" else " statement]
 
