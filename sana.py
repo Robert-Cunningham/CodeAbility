@@ -1,44 +1,59 @@
 import keyboard
 import time
+import re 
 
-keyboard.press_and_release('ctrl+t')
-time.sleep(.5)
+
+dict = {"code":"import code:\nnext line\tthird line\t\n()"}
 
 def execute(command,input):
-    try:
-        if (command == 'code'):
-            keyboard.press_and_release('i')
-            keyboard.write(input)
-            keyboard.press_and_release('esc')
-        elif (command == 'jumpline'):
-            keyboard.write(input + 'G')
-            keyboard.press_and_release('enter')
-        elif (command == 'end_of_line'):
-            keyboard.write('$')
-        elif (command == 'end_of_file'):
-            keyboard.write('G')
-        elif (command == 'end_of_block'):
-            keyboard.write('}')
-        elif (command == 'jumpword'):
-            keyboard.write('\\'+input)
-        elif (command == 'beg_of_line'):
-            keyboard.write('g_')
-        elif (command == 'beg_of_file'):
-            keyboard.write('gg')
-        elif (command  == 'beg_of_block'):
-            keyboard.write('{')
-        elif (command == 'last_word'):
-            keyboard.write('b')
-        elif (command == 'next_word'):
-            keyboard.write('e')
-        elif (command == 'back'):
-            keyboard.press_and_release('backspace')
-        elif (command == '<tab>'):
-           keyboard.press_and_release('tab')
-        elif (command == '<newline>'):
-            keyboard.press_and_release('enter')
-        else:
-            keyboard.press_and_release('esc') 
-    except:
-        pass
-    time.sleep(.5)
+    time.sleep(2)
+    if (command == 'code'):
+        keyboard.write('i')
+        sp = re.split("(\t|\n|\:)", input)
+        for i in sp:
+            if (i == '\\n'):
+                keyboard.press_and_release('enter')
+            elif (i == '\\t'):
+                keyboard.press_and_release(48)
+            elif (i == ':'):
+                keyboard.press(56)
+                keyboard.press(41)
+                keyboard.release(41)
+                keyboard.release(56)
+            else:
+                keyboard.write(i)
+        keyboard.press_and_release('esc')
+        keyboard.press_and_release('enter')
+    elif (command == 'jumpline'):
+        keyboard.write(input + 'G')
+        keyboard.press_and_release('enter')
+    elif (command == 'end_of_line'):
+        keyboard.write('$')
+    elif (command == 'end_of_file'):
+        keyboard.write('G')
+    elif (command == 'end_of_block'):
+        keyboard.write('}')
+    elif (command == 'jumpword'):
+        keyboard.write('\\'+input)
+        keyboard.press_and_release('enter')
+    elif (command == 'beg_of_line'):
+        keyboard.write('g_')
+    elif (command == 'beg_of_file'):
+        keyboard.write('gg')
+    elif (command  == 'beg_of_block'):
+        keyboard.write('{')
+    elif (command == 'last_word'):
+        keyboard.write('b')
+    elif (command == 'next_word'):
+        keyboard.write('e')
+    elif (command == 'back'):
+        keyboard.press_and_release('backspace')
+    elif (command == '\\t'):
+       keyboard.press_and_release('tab')
+    elif (command == '\\n'):
+        keyboard.press_and_release('enter')
+    else:
+        keyboard.press_and_release('esc') 
+for c in dict:
+    execute(c,dict[c])
+
