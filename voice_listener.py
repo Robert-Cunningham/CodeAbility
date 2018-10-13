@@ -106,6 +106,10 @@ class Listener:
 	def __init__(self):
 		self.phrases = []
 		self.alternatives = []
+		self.stop = False
+
+	def stopTimer(self):
+		self.stop = True
 
 	def listen(self, time, callback):
 		language_code = 'en-US'
@@ -129,23 +133,35 @@ class Listener:
 
 			(self.phrases, self.alternatives) = stream.listen_print_loop(responses, time, callback)
 
-	def getPhrases(self):
+	def getPhrases(self, isText=False):
 		possibilities = []
-		for a in self.alternatives:
-			alts = []
-			for t in a:
-				alts.append(t.transcript)
-			possibilities.append(alts)
+		if(not isText):
+			for a in self.alternatives:
+				alts = []
+				for t in a:
+					alts.append(t.transcript)
+				possibilities.append(alts)
+		else: 
+			possibilities = self.phrases
 
 		# clear phrases and alternatives since they have been fetched
 		self.phrases = []
 		self.alternatives = []
+
 		return possibilities
+
+	def inputAsText(self, time):
+		t = Timer(time, self.stopTimer)
+		t.start()
+		while(not self.stop):
+			self.phrases.append(input('>'))
 
 def main():
 	listener = Listener()
-	listener.listen(15.0)
-	possibilities = listener.getPhrases()
+	#listener.listen(15.0)
+	listener.inputAsText(15.0)
+	possibilities = listener.getPhrases(True)
+	print(possibilities)
 
 if __name__ =='__main__':
 	main()
