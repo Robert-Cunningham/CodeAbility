@@ -6,14 +6,16 @@ import time
 import re
 import keyboard
 
-def callback(text):
+all_text = ""
+
+def callback(text, final=False):
+    global all_text
     #concat = ' '.join([x[0] for x in phrases])
     system('clear')
-    print(text)
+    print(all_text + text)
     #concat = concat.replace(' exit', '')
 
-    out = english_to_python.english_to_python(text.strip())
-    print('attempting to write', out)
+    out = english_to_python.english_to_python(all_text)
 
     if out['command'] == 'code':
         subcommands = split_out_specials(out['value'])
@@ -38,17 +40,13 @@ def special_to_escaped(special):
     elif special == '\t':
         return '<tab>'
 
-print(split_out_specials('asdf\tfjs\n'))
-
 time.sleep(2)
 
-callback("if 7 equals 6 then return 3")
+listener = voice_listener.Listener()
+listener.listen(50, callback)
+phrases = listener.getPhrases()
 
-#listener = voice_listener.Listener()
-#listener.listen(5, callback)
-#phrases = listener.getPhrases()
-
-keyboard.press_and_release(r'shift+;')
+#keyboard.press_and_release(r'shift+;')
 time.sleep(.5)
 
 

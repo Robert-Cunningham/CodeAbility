@@ -54,6 +54,4 @@ def execute(command,input):
         keyboard.press_and_release('enter')
     else:
         keyboard.press_and_release('esc') 
-for c in dict:
-    execute(c,dict[c])
 

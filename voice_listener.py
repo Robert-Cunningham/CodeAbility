@@ -89,11 +89,12 @@ class MicrophoneStream(object):
 			if not result.is_final:
 				#sys.stdout.write(transcript + overwrite_chars + '\r')
 				#sys.stdout.flush()
+				callback(transcript)
 				num_chars_printed = len(transcript)
 			else:
 				#sys.stdout.write(transcript + overwrite_chars + '\r')
 				phrases.append(transcript)
-				callback(transcript)
+				callback(transcript, True)
 				alternatives.append(result.alternatives)
 				if re.search(r'\b(exit|quit)\b', transcript, re.I) or self.stop == True:
 					print("exiting...")
