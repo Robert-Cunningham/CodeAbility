@@ -1,15 +1,36 @@
+?start: statement
+    | command
+
 ?expression: int
     | quantity
+    | array_comprehension
     | sum
     | difference
     | call
+    | list
+    | length
     | equals
+    | comparison
+    | array_element
+    | end_array_elements
     | word
+
+length: "the length of " expression
+
+comparison: expression " is " comparator " " expression
+
+comparator: "less than" -> lt
+    | "greater than" -> gt
+    | "less than or equal to" -> lte
+    | "greater than or equal to" -> gte
+    | "equal to" -> eq
 
 call: "call " function_name " with parameters " tuple
     | "result of " function_name " with parameters " tuple
+    | "call " function_name " of " tuple
+    | "result of " function_name " of " tuple
 
-list: "list of" expression (" and " expression)*
+list: "list of " expression (" and " expression)*
     | empty_list
 
 equals: expression " equals " expression
@@ -19,8 +40,14 @@ tuple: expression (" and " expression)*
 ?empty_list: "empty list"
 
 ?function_name: word
+?variable_name: word
 
 sum: expression " plus " expression
+
+array_element: "element " int " of " variable_name
+end_array_elements: "elements " expression " through end of " variable_name
+
+array_comprehension: expression " for " variable_name " in " expression " if " comparison
 
 ?quantity: "quantity " sum
     | "quantity " difference
@@ -33,14 +60,24 @@ statement: return_
     | ifelse
     | expression
     | definition
+    | set_var
+    | statement " then " statement
 
 ifelse: "if " expression " then " statement [(" otherwise if " expression " then " statement)*] [" else " statement]
 
 return_: "return " expression
 
+set_var: "set " variable_name " to " expression
+
 int: NUMBER
 
 ?word: WORD
+
+?command: next_word
+    | last_word
+
+?next_word: "next word"
+?last_word: "last word"
 
 %import common.NUMBER
 %import common.ESCAPED_STRING

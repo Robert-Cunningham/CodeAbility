@@ -8,10 +8,16 @@
 
 from lark import Lark, Transformer
 import traceback
+import synonyms
 
 grammar = open('pythonicEnglish.lark').read()
 
-parser = Lark(grammar, start='statement', debug=True)
+parser = Lark(grammar, start='start', debug=True)
+
+def synonymize(text):
+    for (k, v) in synonyms.synonyms.items():
+        text = text.replace(" " + k + " ", " " + v + " ")
+    return text
 
 def list_to_str(l):
     return "[" + ''.join([x + "," for x in l])[:-1] + "]"
@@ -44,7 +50,11 @@ class PythonTransformer(Transformer):
         return str(items[0])
     
     def statement(self, items):
-        return str(items[0])
+        out = ""
+        for i in items:
+            out += "\n" + str(i)
+        
+        return out[1:]
     
     def drv(self, items):
         return str(items[0])
@@ -52,10 +62,34 @@ class PythonTransformer(Transformer):
     def WORD(self, items):
         return items[0]
     
+    def lt(self, items):
+        return "<"
+    def gt(self, items):
+        return ">"
+    def lte(self, items):
+        return "<="
+    def gte(self, items):
+        return ">="
+    def eq(self, items):
+        return "=="
+    
+    def length(self, items):
+        return "len(" + items[0] + ")"
+
+    def comparison(self, items):
+        return items[0] + " " + items[1] + " " + items[2]
+    
+    def set_var(self, items):
+        return items[0] + " = " + items[1]
+    
+    def array_element(self, items):
+        return items[1] + "[" + items[0] + "]"
+    
+    
     def ifelse(self, items): #if (1) then (2) elif (3) then (4) elif (5) then (6) else (7)
         print(items)
         out = ""
-        ifpart = "if " + items[0] + ":\n\t" + items[1] + "\n"
+        ifpart = "if " + items[0] + ":\n" + items[1] + "\n"
 
         out += ifpart
 
@@ -80,18 +114,39 @@ class PythonTransformer(Transformer):
         
         return "def " + fn + "(" + args + "):\n\t" + body
 
+    def array_comprehension(self, items):
+        print(items)
+        return "[" + items[0] + " for " + items[1] + " in " + items[2] + " if " + items[3] + "]"
+    
+    def end_array_elements(self, items):
+        return items[1] + "[" + items[0] + ":]"
     
     def return_(self, items):
         return "return " + items[0]
+    
+    #------- COMMANDS --------
+
+    def next_word(self, items):
+        return "COMMAND next_word"
+
+    def last_word(self, items):
+        return "COMMAND last_word"
 
 def english_to_python(english):
     try:
+        english = synonymize(english)
         tree = parser.parse(english)
         print(tree.pretty())
         out = PythonTransformer().transform(tree)
-        return out
-    except Exception as e:
-        print(" Does not compile.")
+        print(out)
+        if "COMMAND " in out:
+            out = out.replace("COMMAND ", "")
+            return {'command': out, 'value': ""}
+        else:
+            return {'command': "code", 'value': out}
+    except:
+        traceback.print_exc()
+        print("Does not compile.")
         return None
 
 def dump_newlines(str):
@@ -116,8 +171,45 @@ fib = """
 define fib with parameters n and body 
 if n equals 0 then return 0
 otherwise if n equals 1 then return 1
-else return result of fib with parameters quantity n minus 1 plus result of fib with parameters quantity n minus two
+else return result of fib of quantity n minus 1 plus result of fib of quantity n minus two
 done
 """
+
+test = "x for x in array is greater than 2 if x is less than 3"
+comptest = "x is less than 3"
+
+quick_sort = """
+define sort with parameters array and body
+if the length of array is less than or equal to 1 then
+return array
+else
+set pivot to element 0 of array then
+set larger to x for x in elements 1 through end of array if x is greater than pivot then
+set smaller to x for x in elements 1 through end of array if x is less than or equal to pivot then
+return result of sort of smaller plus list of pivot plus result of sort of larger
+done
+"""
+
+print(english_to_python(dump_newlines(quick_sort)))
+#print(english_to_python(dump_newlines(quick_sort)))
+
+"""
+"""
+
+def q_sort(array):
+    if len(array) <= 1:
+        return array
+    else:
+        pivot = array[0]
+        larger = [ element for element in array[1:] if element > pivot ]
+        smaller = [ element for element in array[1:] if element <= pivot ]
+        return q_sort(smaller) + [pivot] + q_sort(larger)
+
+print(q_sort([-4, 1, -200, 0, 200, -200]))
+
+
+#def e(n=10):
+#    return sum(1 / float(math.factorial(i)) for i in range(n))
+
 
 #print(english_to_python(dump_newlines(fib)))
