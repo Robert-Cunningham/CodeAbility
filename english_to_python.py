@@ -61,7 +61,7 @@ class PythonTransformer(Transformer):
     def ifelse(self, items): #if (1) then (2) elif (3) then (4) elif (5) then (6) else (7)
         print(items)
         out = ""
-        ifpart = "if " + items[0] + ":\n\t" + items[1] + "\n"
+        ifpart = "if " + items[0] + ":\n" + items[1] + "\n"
 
         out += ifpart
 
@@ -106,9 +106,9 @@ def english_to_python(english):
         out = PythonTransformer().transform(tree)
         if "COMMAND " in out:
             out = out.replace("COMMAND ", "")
-            return {'command': "command", 'input': out}
+            return {'command': out, 'value': ""}
         else:
-            return {'command': "code", 'input': out}
+            return {'command': "code", 'value': out}
     except:
         traceback.print_exc()
         print("Does not compile.")
@@ -136,8 +136,30 @@ fib = """
 define fib with parameters n and body 
 if n equals 0 then return 0
 otherwise if n equals 1 then return 1
-else return result of fib with parameters quantity n minus 1 plus result of fib with parameters quantity n minus two
+else return result of fib of quantity n minus 1 plus result of fib of quantity n minus two
 done
 """
+
+e = """
+
+"""
+
+quick_sort = """
+
+"""
+
+def quick_sort(ARRAY):
+    if( len(array) <= 1):
+        return array
+    else:
+        pivot = array[0]
+        greater = [ element for element in ARRAY[1:] if element > PIVOT ]
+        lesser = [ element for element in ARRAY[1:] if element <= PIVOT ]
+        return quick_sort(LESSER) + [PIVOT] + quick_sort(GREATER)
+
+
+#def e(n=10):
+#    return sum(1 / float(math.factorial(i)) for i in range(n))
+
 
 #print(english_to_python(dump_newlines(fib)))

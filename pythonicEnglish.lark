@@ -11,6 +11,8 @@
 
 call: "call " function_name " with parameters " tuple
     | "result of " function_name " with parameters " tuple
+    | "call " function_name " of " tuple
+    | "result of " function_name " of " tuple
 
 list: "list of" expression (" and " expression)*
     | empty_list
