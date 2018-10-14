@@ -1,4 +1,4 @@
-![CodeAbility](https://raw.githubusercontent.com/robert-cunningham/CodeAbility/master/codelogo.png =250x250)
+<img src="https://raw.githubusercontent.com/robert-cunningham/CodeAbility/master/codelogo.png" width="250" height="250">
 ## Summary
 Code Dictate is a dictation tool especially for programmers. Most text to speech today is meant specifically to parse English, which makes it very hard to dictate code without saying something like
 
