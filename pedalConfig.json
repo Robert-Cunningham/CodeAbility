@@ -27,7 +27,7 @@
     "numPedals": 5
 },
   "numPedals": 5,
-  "port":"COM6",
+  "port":"/dev/ttyACM0",
   "onKey": ["PTT", "SHIFT", "down", "up", "ctrl+tab"],
   "onKeySHIFT": ["PTT TOGGLE", "SHIFT", "esc+shift+o", "esc+o", "ctrl+shift+tab"]
 }

@@ -55,4 +55,3 @@ raw_synonyms = {
 }
 
 synonyms = {("(^|[^A-Za-z])" + k + "([^A-Za-z]|$)"): " " + v + " " for (k, v) in raw_synonyms.items()}
-print(synonyms)

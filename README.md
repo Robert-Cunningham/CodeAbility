@@ -50,15 +50,8 @@ You can create the following items with the **create** keyword. The [] means tha
 
 ### Jump to and goto
 
-You can do the following with the **jump to** and **goto** keywords:
-- end of file
-- end of line
-- end of block (eg. current statement or function)
+You can do the following with the **teleport to** and **goto** keywords:
 - line #
-- next [word]
-- beginning of file
-- beginning of line
-- beginning of block
 - next word
 - last word / previous word
 
@@ -119,8 +112,6 @@ You can do the following with the **jump to** and **goto** keywords:
 	- Set x to y
 - Strings
 	- Quote hello unquote
--Meta edits
-	- Replace fake with real
 
 
 ## Full Program Examples
@@ -134,28 +125,6 @@ You can do the following with the **jump to** and **goto** keywords:
     def sum(x, y):
 	    return x + y
 	print(sum(math.pow(2,3),70))
-
-> if num is greater than one then\
-> create for range\
-> i next\
-> two comma num next\
-> if num modulus i equals 0 then\
-> return false\
-> break\
-> back else\
-> return true\
-> back back else\
-> return false
-
-    if num > 1:
-        for i in range(2,num):
-            if (num % i) == 0:
-            return false
-            break
-        else:
-            return true
-    else:
-        return false
 
 > define sort with parameters array and body\
 > if the length of array is less than or equal to 1 then\
@@ -175,45 +144,27 @@ You can do the following with the **jump to** and **goto** keywords:
     smaller = [ element for element in array[1:] if element <= pivot ]
     return q_sort(smaller) + [pivot] + q_sort(larger)
 
-> create function binary search next\
-> list comma item next\
-> first equals 0\
-> last equals call len of list minus one\
-> found equals False\
-> while first is less than or equal to last and not found do\
-> midpoint equals quantity first plus last divided by two\
-> if element midpoint of list equals item then\
-> found equals True\
-> else\
-> if item is less than element midpoint of list\
-> last equals midpoint minus one\
-> else\
-> last equals midpoint plus one\
-> back back back\
-> return found\
-> back\
-> set test list to list of 0 and 1 and 2 and 8 and 13 and 17 and 19 and 32 and 42\
-> call print with result of call binary search with parameters test list and 3\
-> call print with result of call binary search with parameters test list and 13
+> if num is greater than one then\
+> create for range\
+> india next\
+> two comma num next\
+> if num modulus india equals 0 then\
+> return false\
+> break\
+> back else\
+> return true\
+> back back else\
+> return false
 
-	  def binarySearch(list, item):
-	    first = 0
-	    last = len(list) - 1
-	    found = False
-	    while(first <= last and not found):
-	      midpoint = (first + last) / 2
-	      if(list[midpoint] == item):
-		found = True
-	      else:
-		if(item < list[midpoint]):
-		  last = midpoint - 1
-		else:
-		  last = midpoint + 1
-	    return found
-
-	  testlist = [0, 1, 2, 8, 13, 17, 19, 32, 42,]
-	  print(binarySearch(testlist,3))
-	  print(binarySearch(testlist),13)
+    if num > 1:
+        for i in range(2,num):
+            if (num % i) == 0:
+            return false
+            break
+        else:
+            return true
+    else:
+        return false
 
 ## Hardware
 
