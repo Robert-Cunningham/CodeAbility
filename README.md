@@ -69,14 +69,56 @@ You can do the following with the **jump to** and **goto** keywords:
 		- and 
 		- pound
 		- carat
-## Examples
+## Examples <ACCOUNT FOR PEDALS>
 
 > import math
 > define function sum with parameters X-Ray and Yankee
 > return X-Ray plus Yankee
-> call print with result of sum with parameters math dot pow of 2 comma 3 and 70
+> back call print with result of sum with parameters math dot pow of 2 comma 3 and 70
 
     import math
     def sum(x, y):
 	    return x + y
 	print(sum(math.pow(2,3),70))
+    
+> if num is greater than one then
+> create for range 
+> i next 
+> two comma num next
+> if num modulus i equals 0 then
+> return false
+> break
+> back else
+> return true
+> back back else
+> return false
+
+    if num > 1:
+        for i in range(2,num):
+            if (num % i) == 0:
+            return false
+            break
+        else:
+            return true
+    else:
+        return false
+
+> define sort with parameters array and body
+> if the length of array is less than or equal to 1 then
+> return array
+> else
+> set pivot to element 0 of array then
+> set larger to x for x in elements 1 through end of array if x is greater than pivot then
+> set smaller to x for x in elements 1 through end of array if x is less than or equal to pivot then
+> return result of sort of smaller plus list of pivot plus result of sort of larger
+
+    def q_sort(array):
+    if len(array) <= 1:
+    return array
+    else:
+    pivot = array[0]
+    larger = [ element for element in array[1:] if element > pivot ]
+    smaller = [ element for element in array[1:] if element <= pivot ]
+    return q_sort(smaller) + [pivot] + q_sort(larger)
+
+## Hardware
