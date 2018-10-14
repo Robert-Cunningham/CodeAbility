@@ -1,6 +1,7 @@
 import re
 
 raw_synonyms = {
+   'zero':'0',
    'one':'1',
    'two':'2',
    'three':'3',
@@ -49,6 +50,8 @@ raw_synonyms = {
    'the': '',
    'when': 'if',
    'find': 'define'
+   'parameter':'parameters',
+   'perimeter':'parameters'
 }
 
 synonyms = {("(^|[^A-Za-z])" + re.escape(k) + "([^A-Za-z]|$)"): " " + v + " " for (k, v) in raw_synonyms.items()}

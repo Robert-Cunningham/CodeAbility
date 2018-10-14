@@ -1,26 +1,26 @@
-# Code Dictate
+<center><img src="https://raw.githubusercontent.com/robert-cunningham/CodeAbility/master/codelogo.png" height="250"></center>
 
 ## Summary
 Code Dictate is a dictation tool especially for programmers. Most text to speech today is meant specifically to parse English, which makes it very hard to dictate code without saying something like
 
 > If open parenthesis x equals equals 5 close parenthesis open bracket...
 
-Many programmers can't use their hands; from stress related injuries to carpal tunnel to early onset arthritis and even paralysis and nerve damage. Whatever the cause, these programmers have a very hard time typing their programs and have to choose between trying to use an existing dictation software not meant for programmers, or avoiding writing new code altogether. 
+Many programmers can't use their hands; from stress related injuries to carpal tunnel to early onset arthritis and even paralysis and nerve damage. Whatever the cause, these programmers have a very hard time typing their programs and have to choose between trying to use an existing dictation software not meant for programmers, or avoiding writing new code altogether.
 
 With Code Dictate, the above if statement can be dictated as
 
 > If x equals 5 then
 
-Which will be parsed as 
+Which will be parsed as
 
     if(x == 5):
 	    # body
-	 
+
 
 ## User Guide
 If the program parse what you say straight into code, it will insert it into your file. Otherwise, there are specific voice commands that you can use for various operations. The program uses the NATO phonetic alphabet to say single letters, as not to confuse the speech to text algorithm.
 
-The specific commands are split into the following catagories: 
+The specific commands are split into the following catagories:
 
  - `Create [item]`: Creates an item such as a for loop, if statement etc
 	 - When creating an item, use the word "next" to jump to the next field
@@ -53,20 +53,21 @@ You can do the following with the **jump to** and **goto** keywords:
 - next word
 - last word / previous word
 
-### Callling functions 
+### Callling functions
 - No parameters
 	- call [function name]
 - One parameter
 	- call [function name] with parameter [param]
 - Parameter as return value
 - Multiple parameters
+
 ### Delimiting lists
-- If you have a nested list (like a nested function call), each list should be delimited with the same word, with different words for different lists. For example: 
+- If you have a nested list (like a nested function call), each list should be delimited with the same word, with different words for different lists. For example:
 	-  > print the result of func with parameters second func 40 comma third func 9 pound 4 and 7
 		- `print(func(secondFunc(40,thirdFunc(9,4)),7)`
 	- You can use the following words to distinguish between separate lists:
 		- comma
-		- and 
+		- and
 		- pound
 		- carat
 ## Examples <ACCOUNT FOR PEDALS>
@@ -80,10 +81,10 @@ You can do the following with the **jump to** and **goto** keywords:
     def sum(x, y):
 	    return x + y
 	print(sum(math.pow(2,3),70))
-    
+
 > if num is greater than one then
-> create for range 
-> i next 
+> create for range
+> i next
 > two comma num next
 > if num modulus i equals 0 then
 > return false
@@ -120,5 +121,46 @@ You can do the following with the **jump to** and **goto** keywords:
     larger = [ element for element in array[1:] if element > pivot ]
     smaller = [ element for element in array[1:] if element <= pivot ]
     return q_sort(smaller) + [pivot] + q_sort(larger)
+
+> create function binary search next
+> list comma item next
+> first equals 0
+> last equals call len of list minus one
+> found equals False
+> while first is less than or equal to last and not found do
+> midpoint equals quantity first plus last divided by two
+> if element midpoint of list equals item then
+> found equals True
+> else
+> if item is less than element midpoint of list
+> last equals midpoint minus one
+> else
+> last equals midpoint plus one
+> back back back
+> return found
+> back
+> set test list to list of 0 and 1 and 2 and 8 and 13 and 17 and 19 and 32 and 42
+> call print with result of call binary search with parameters test list and 3
+> call print with result of call binary search with parameters test list and 13
+> done
+
+  def binarySearch(list, item):
+    first = 0
+    last = len(list) - 1
+    found = False
+    while(first <= last and not found):
+      midpoint = (first + last) / 2
+      if(list[midpoint] == item):
+        found = True
+      else:
+        if(item < list[midpoint]):
+          last = midpoint - 1
+        else:
+          last = midpoint + 1
+    return found
+
+  testlist = [0, 1, 2, 8, 13, 17, 19, 32, 42,]
+  print(binarySearch(testlist,3))
+  print(binarySearch(testlist),13)
 
 ## Hardware
