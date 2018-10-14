@@ -8,16 +8,16 @@ linuxSerialPort = "/dev/ttyACM0"
 #json_data!!
 scroll_down = 'ctrl+alt+up'
 scroll_up = 'ctrl+alt+down'
-tab_left = 'ctrl+shift+tab'
-tab_right = 'ctrl+tab'
+tab_next = 'ctrl+shift+tab'
+tab_recent = 'ctrl+tab'
 
-new_line_above = 'esc+shift+o' # shift up
-new_line_below = 'esc+o' # shift down
+new_line_above = 'esc+o'
+new_line_below = 'esc+shift+o' 
 
 #press actions (order in array is index of pedal)
 
-onKey = ["PTT", "SHIFT", scroll_down, scroll_up, tab_right]
-onKeySHIFT = ["PTT TOGGLE", "SHIFT", new_line_below, new_line_above, tab_left] #FIX THIS
+onKey = ["PTT", "SHIFT", scroll_down, scroll_up, tab_recent]
+onKeySHIFT = ["PTT TOGGLE", "SHIFT", new_line_below, new_line_above, tab_next] #FIX THIS
 
 def PTTHook(a):
     pass
