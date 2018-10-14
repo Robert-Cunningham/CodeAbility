@@ -142,6 +142,9 @@ class PythonTransformer(Transformer):
 
     def create_if(self, items):
         return "CREATE if"
+    
+    def next_(self, items):
+        return "NEXT " + items[0]
 
 def english_to_python(english):
     try:
@@ -151,6 +154,9 @@ def english_to_python(english):
         #print(tree.pretty())
         out = PythonTransformer().transform(tree)
         print(out)
+        if "NEXT" in out:
+            out = out.replace("NEXT ", "")
+            return {'command': 'next', 'value': out}
         if "CREATE" in out:
             out = out.replace("CREATE ", "")
             return {'command': 'create', 'value': out}
@@ -232,6 +238,7 @@ def preprocess(s):
     s = s.lower()
     s = synonymize(s)
     s = s.replace("  ", " ").replace("  ", " ").replace("  ", " ")
+    s = s.strip()
     return s
 
 #print(english_to_python('next word'))

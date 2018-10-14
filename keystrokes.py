@@ -13,7 +13,7 @@ keyboard.write('a')
 
 def execute(command,input):
     if (command == 'code'):
-        sp = re.split("(\t|\n|\:)", input)
+        sp = re.split("(\t|\n|\:|\(|\))", input)
         for i in sp:
             if (i == '\n'):
                 keyboard.press_and_release('esc')
@@ -26,6 +26,12 @@ def execute(command,input):
                 time.sleep(delayTime)
             elif (i == ':'):
                 keyboard.press_and_release('shift+;')
+                time.sleep(delayTime)
+            elif (i == '('):
+                keyboard.press_and_release('shift+9')
+                time.sleep(delayTime)
+            elif (i == ')'):
+                keyboard.press_and_release('shift+0')
                 time.sleep(delayTime)
             else:
                 keyboard.write(i)

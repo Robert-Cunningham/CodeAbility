@@ -1,6 +1,7 @@
 ?start: statement
     | command
     | create
+    | next_
 
 ?expression: int
     | quantity
@@ -84,9 +85,12 @@ int: NUMBER
     | create_if
     | create_for_loop
 
-create_for_range: "create for range"
+create_for_range: "create range"
 create_if: "create if"
-create_for_loop: "create for loop"
+create_for_loop: "create loop"
+
+next_: expression " next"
+    | statement " next"
 
 %import common.NUMBER
 %import common.ESCAPED_STRING

@@ -1,3 +1,5 @@
+import re
+
 raw_synonyms = {
    'one':'1',
    'two':'2',
@@ -39,7 +41,9 @@ raw_synonyms = {
    '-':'minus',
    'free':'three',
    'return to': 'return',
-   'create 4': 'create for'
+   'create 4': 'create for',
+   'next to': 'next',
+   'ranch': 'range'
 }
 
-synonyms = {("\b" + k + "\b"): v for (k, v) in raw_synonyms.items()}
+synonyms = {("(^|[^A-Za-z])" + re.escape(k) + "([^A-Za-z]|$)"): " " + v + " " for (k, v) in raw_synonyms.items()}
