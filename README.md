@@ -234,7 +234,7 @@ Pushing Tab switches between the 2 most recent tabs, and pressing Shift with Tab
 Shift:
 (Modifier key).
 
-##Images
+## Images
 
 <p align="center"><img src="https://github.com/Robert-Cunningham/CodeAbility/blob/master/Images/codelogo.png" height="300"></align>
 
