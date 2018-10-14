@@ -238,10 +238,11 @@ Shift:
 
 <p align="center"><img src="https://github.com/Robert-Cunningham/CodeAbility/blob/master/Images/Cover_image.jpg" height="300"></align>
 
+<p align="center"><img src="https://github.com/Robert-Cunningham/CodeAbility/blob/master/Images/Project_in_use.jpg" height="300"></align>
+
+
 <p align="center"><img src="https://github.com/Robert-Cunningham/CodeAbility/blob/master/Images/top_pedal_design.png" height="300"></align>
 
 <p align="center"><img src="https://github.com/Robert-Cunningham/CodeAbility/blob/master/Images/Bottom_pedal_design.png" height="300"></align>
 
 <p align="center"><img src="https://github.com/Robert-Cunningham/CodeAbility/blob/master/Images/Schematic_Scrn.png" height="300"></align>
-
-<p align="center"><img src="https://github.com/Robert-Cunningham/CodeAbility/blob/master/Images/Project_in_use.jpg" height="300"></align>
