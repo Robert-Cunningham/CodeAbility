@@ -134,6 +134,12 @@ class PythonTransformer(Transformer):
 
     def back(self, items):
         return "COMMAND back"
+
+    def teleport_line(self, items):
+        return "COMMAND jumpline " + items[0]
+
+    def teleport_word(self, items):
+        return "COMMAND jumpword " + items[0]
     
     def create_for_loop(self, items):
         return "CREATE for"
@@ -143,9 +149,18 @@ class PythonTransformer(Transformer):
 
     def create_if(self, items):
         return "CREATE if"
+
+    def create_def(self, items):
+        return "CREATE def"
+
+    def create_else(self, items):
+        return "CREATE else"
     
     def next_(self, items):
         return "NEXT " + items[0]
+    
+    def quote(self, items):
+        return "'" + items[0] + "'"
 
 def english_to_python(english):
     try:
@@ -163,7 +178,7 @@ def english_to_python(english):
             return {'command': 'create', 'value': out}
         if "COMMAND " in out:
             out = out.replace("COMMAND ", "")
-            return {'command': out, 'value': ""}
+            return {'command': out.split(' ')[0], 'value': ' '.join(out.split(' ')[1:])}
         else:
             return {'command': "code", 'value': out}
     except:
@@ -218,9 +233,6 @@ done
 
 #print(english_to_python(dump_newlines(wtf.lower())))
 #print(english_to_python(dump_newlines(quick_sort)))
-
-"""
-"""
 
 def q_sort(array):
     if len(array) <= 1:

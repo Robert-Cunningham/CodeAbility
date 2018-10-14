@@ -1,19 +1,18 @@
 import voice_listener
 import english_to_python
 import keystrokes
-#import serialFootPedalControl
+import keyboard
 
 from os import system
 import time
 import re
 import keyboard
 
-useKeyboardInput = False
-lastFootState = False
+useKeyboardInput = True
 
-def onChange(state):
-    print('change', state)
-    #if state and not lastFootState:
+#def onChange(state):
+#    print('change', state)
+#    #if state and not lastFootState:
 
 
 
@@ -32,9 +31,15 @@ def callback(text, final=False):
 
     if useKeyboardInput:
         print("Executing keystrokes in 3 seconds.")
-        time.sleep(3)
+        keyboard.press_and_release("alt+tab")
+        time.sleep(1)
 
     keystrokes.execute(out['command'], out['value'])
+
+    if useKeyboardInput:    
+        time.sleep(1)
+        keyboard.press_and_release("alt+tab")
+
     #if out['command'] == 'code':
     #    subcommands = split_out_specials(out['value'])
     #    [keystrokes.execute(x['command'], x['value']) for x in subcommands]

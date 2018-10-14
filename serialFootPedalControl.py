@@ -6,8 +6,8 @@ windowsSerialPort = "COM6"
 linuxSerialPort = "/dev/ttyACM0"
 
 #json_data!!
-scroll_down = 'ctrl+alt+up'
-scroll_up = 'ctrl+alt+down'
+scroll_down = 'up'
+scroll_up = 'down'
 tab_next = 'ctrl+shift+tab'
 tab_recent = 'ctrl+tab'
 
@@ -29,8 +29,8 @@ def setPTTHook(input_fn):
 shiftState = False
 PTTLockedState = False
 
-ser = serial.Serial(windowsSerialPort, 9600)
-#ser = serial.Serial(linuxSerialPort, 9600)
+#ser = serial.Serial(windowsSerialPort, 9600)
+ser = serial.Serial(linuxSerialPort, 9600)
 
 while True:
     code=int(ser.readline())
