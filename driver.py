@@ -8,7 +8,7 @@ import time
 import re
 import keyboard
 
-useKeyboardInput = True
+useKeyboardInput = False
 
 #def onChange(state):
 #    print('change', state)

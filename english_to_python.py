@@ -30,6 +30,9 @@ class PythonTransformer(Transformer):
 
     def difference(self, items):
         return items[0] + "-" + items[1]
+
+    def product(self, items):
+        return items[0] + "*" + items[1]
     
     def int(self, n):
         return str(n[0])
@@ -164,12 +167,13 @@ class PythonTransformer(Transformer):
 
 def english_to_python(english):
     try:
-        #print(english)
+        print(english)
         english = preprocess(english)
+        print(english)
         tree = parser.parse(english)
-        #print(tree.pretty())
+        print(tree.pretty())
         out = PythonTransformer().transform(tree)
-        print(out)
+        #print(out)
         if "NEXT" in out:
             out = out.replace("NEXT ", "")
             return {'command': 'next', 'value': out}

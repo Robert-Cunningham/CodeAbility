@@ -8,6 +8,7 @@
     | array_comprehension
     | sum
     | difference
+    | product
     | call
     | list
     | length
@@ -51,6 +52,8 @@ tuple: expression (" and " expression)*
 
 sum: expression " plus " expression
 
+product: expression " times " expression
+
 array_element: "element " int " of " variable_name
     | "element at " expression " in " variable_name
 
@@ -60,6 +63,7 @@ array_comprehension: expression " for " variable_name " in " expression " if " c
 
 ?quantity: "quantity " sum
     | "quantity " difference
+    | "quantity " product
 
 difference: expression " minus " expression
 
