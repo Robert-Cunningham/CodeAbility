@@ -5,11 +5,13 @@ import re
 
 delayTime = 0
 
-mydict = [("code","import math\na = 'abcdefg'\n"),("create","for"),('next','c'),
-        ('next','a'),('next','print(c)'),('code','\nprint("...")')]
+# mydict = [("create","def"),("next","fibonacci"),("next","n"),("next","if(n==0):"),("code",'\n'),
+#           ("code","return 0\n"),("code","elif(n==1):\n"),("code","return 1\n"),("code","else:\n"),
+#            ("code","return fibonacci(n-1) + fibonacci(n-2)")]
 
-keyboard.press_and_release("ctrl+t")
-keyboard.write('a')
+mydict = [("create","def"),("next","binarySearch"),("next","alist, item"),("next","first=0"),("code","\n"),("code","return 0\n"),("back",None)]
+
+#keyboard.press_and_release("ctrl+t")
 
 def execute(command,input):
     if (command == 'code'):
@@ -112,8 +114,8 @@ def execute(command,input):
         keyboard.press_and_release('esc') 
         time.sleep(delayTime)
 
-#time.sleep(2)
+time.sleep(2)
 #keyboard.write('a')
-#for c in mydict:
- #   execute(c[0],c[1])
+for c in mydict:
+    execute(c[0],c[1])
 
