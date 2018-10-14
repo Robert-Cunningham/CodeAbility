@@ -74,10 +74,10 @@ int: NUMBER
 ?word: WORD
 
 ?command: next_word
-    | last_word
+    | previous_word
 
 ?next_word: "next word"
-?last_word: "last word"
+?previous_word: "previous word"
 
 %import common.NUMBER
 %import common.ESCAPED_STRING

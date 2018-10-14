@@ -9,6 +9,7 @@
 from lark import Lark, Transformer
 import traceback
 import synonyms
+import re
 
 grammar = open('pythonicEnglish.lark').read()
 
@@ -16,8 +17,9 @@ parser = Lark(grammar, start='start', debug=True)
 
 def synonymize(text):
     for (k, v) in synonyms.synonyms.items():
-        text = text.replace(" " + k + " ", " " + v + " ")
-    return text
+        text = re.sub(k, v, text)
+        #text = text.replace(k, v)
+    return text.lower()
 
 def list_to_str(l):
     return "[" + ''.join([x + "," for x in l])[:-1] + "]"
@@ -129,14 +131,15 @@ class PythonTransformer(Transformer):
     def next_word(self, items):
         return "COMMAND next_word"
 
-    def last_word(self, items):
-        return "COMMAND last_word"
+    def previous_word(self, items):
+        return "COMMAND previous_word"
 
 def english_to_python(english):
     try:
-        english = synonymize(english)
+        english = preprocess(english)
+        print('preprocessed', english)
         tree = parser.parse(english)
-        print(tree.pretty())
+        #print(tree.pretty())
         out = PythonTransformer().transform(tree)
         print(out)
         if "COMMAND " in out:
@@ -168,12 +171,16 @@ def dump_newlines(str):
 #    else: return F(n-1)+F(n-2)
 
 fib = """
-define fib with parameters n and body 
-if n equals 0 then return 0
-otherwise if n equals 1 then return 1
-else return result of fib of quantity n minus 1 plus result of fib of quantity n minus two
+define fibonnaci with parameters november and body 
+if november equals 0 then return 0
+otherwise if november equals 1 then return 1
+else return result of fibonnaci of quantity november minus 1 plus result of fibbonaci of quantity november minus two
 done
 """
+
+wtf = 'Define Fibonacci with parameters November and body if November equals zero then return 0 otherwise if November equals one then return one else return result of Fibonacci of quantity November - 1 + result of Fibonacci of quantity November -2 done'
+wtf2 = 'Define Fibonacci with parameters November and body if November equals zero then return 0 otherwise if November equals one then return one else return result of Fibonacci of quantity November - 1 + result of Fibonacci '
+wtf3 = 'Define Fibonacci with parameters November and body if November equals zero then return zero otherwise if November equals one then return one else return result of Fibonacci of quantity November - 1 + result of Fibonacci of quantity November - 2 done'
 
 test = "x for x in array is greater than 2 if x is less than 3"
 comptest = "x is less than 3"
@@ -190,7 +197,7 @@ return result of sort of smaller plus list of pivot plus result of sort of large
 done
 """
 
-print(english_to_python(dump_newlines(quick_sort)))
+#print(english_to_python(dump_newlines(wtf.lower())))
 #print(english_to_python(dump_newlines(quick_sort)))
 
 """
@@ -205,11 +212,14 @@ def q_sort(array):
         smaller = [ element for element in array[1:] if element <= pivot ]
         return q_sort(smaller) + [pivot] + q_sort(larger)
 
-print(q_sort([-4, 1, -200, 0, 200, -200]))
-
-
 #def e(n=10):
 #    return sum(1 / float(math.factorial(i)) for i in range(n))
 
+def preprocess(s):
+    s = dump_newlines(s)
+    s = s.lower()
+    s = synonymize(s)
+    s = s.replace("  ", " ").replace("  ", " ").replace("  ", " ")
+    return s
 
-#print(english_to_python(dump_newlines(fib)))
+#print(english_to_python('next word'))
