@@ -81,7 +81,7 @@ You can do the following with the **jump to** and **goto** keywords:
 		- and
 		- pound
 		- carat
-		
+
 ## Line by Line Examples
 
 - return the result of the factorial of the quantity 5 plus the element at x plus y in myarray → `return factorial(5 + myArray[x + y])`
@@ -216,3 +216,22 @@ You can do the following with the **jump to** and **goto** keywords:
 	  print(binarySearch(testlist),13)
 
 ## Hardware
+
+There are 5 foot pedals: PTT, Shift, Down, Up, and Tab.
+
+These are the default settings (configurable in pedalConfig.json):
+
+PTT:
+When pushing PTT, the program begins listening for commands and processes any speech into formatted syntactic text. Letting go of PTT ends speech to text conversion. Holding Shift and then depressing PTT latches PTT, so that the program continues listening without continual depression of the PTT pedal. To disable PTT latch, press the PTT pedal (pressing Shift is not necessary).
+
+Down:
+Pushing Down moves the cursor down one line, and pressing Shift with Down inserts a new line below the cursor.
+
+Up:
+Pushing Up moves the cursor up one line,, and pressing Shift with Up inserts a new line aboe the cursor.
+
+Tab:
+Pushing Tab switches between the 2 most recent tabs, and pressing Shift with Tab allow you to cycle through all open tabs.
+
+Shift:
+(Modifier key).
