@@ -51,7 +51,10 @@ raw_synonyms = {
    'when': 'if',
    'find': 'define',
    'parameter':'parameters',
-   'perimeter':'parameters'
-}
+   'perimeter':'parameters',
+   'clear':'create',
+   'x':'times',
+   '[*]':'times'
+   }
 
 synonyms = {("(^|[^A-Za-z])" + k + "([^A-Za-z]|$)"): " " + v + " " for (k, v) in raw_synonyms.items()}
