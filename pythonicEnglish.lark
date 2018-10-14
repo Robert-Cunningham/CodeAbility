@@ -77,9 +77,12 @@ int: NUMBER
 
 ?command: next_word
     | previous_word
+    | back
 
 ?next_word: "next word"
 ?previous_word: "previous word"
+
+?back: "backspace"
 
 ?create: create_for_range
     | create_if
