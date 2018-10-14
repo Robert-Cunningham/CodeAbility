@@ -115,7 +115,7 @@ class PythonTransformer(Transformer):
         body = items[2]
         
         return "def " + fn + "(" + args + "):\n\t" + body
-
+    
     def array_comprehension(self, items):
         print(items)
         return "[" + items[0] + " for " + items[1] + " in " + items[2] + " if " + items[3] + "]"
@@ -133,15 +133,27 @@ class PythonTransformer(Transformer):
 
     def previous_word(self, items):
         return "COMMAND previous_word"
+    
+    def create_for_loop(self, items):
+        return "CREATE for"
+
+    def create_for_range(self, items):
+        return "CREATE forr"
+
+    def create_if(self, items):
+        return "CREATE if"
 
 def english_to_python(english):
     try:
+        print(english)
         english = preprocess(english)
-        print('preprocessed', english)
         tree = parser.parse(english)
         #print(tree.pretty())
         out = PythonTransformer().transform(tree)
         print(out)
+        if "CREATE" in out:
+            out = out.replace("CREATE ", "")
+            return {'command': 'create', 'value': out}
         if "COMMAND " in out:
             out = out.replace("COMMAND ", "")
             return {'command': out, 'value': ""}

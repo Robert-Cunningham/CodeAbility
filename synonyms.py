@@ -38,7 +38,8 @@ raw_synonyms = {
    '+':'plus',
    '-':'minus',
    'free':'three',
-   'return to': 'return'
+   'return to': 'return',
+   'create 4': 'create for'
 }
 
 synonyms = {("\b" + k + "\b"): v for (k, v) in raw_synonyms.items()}
