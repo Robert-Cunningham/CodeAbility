@@ -1,0 +1,16 @@
+{
+  "reference": {
+    "readMe": "Copy the hotkeys into each field of onKey and onKeySHIFT to allocate each action",
+    "readMe2": "Each element in the array is a pedal.",
+    "move_down": "ctrl+alt+down",
+    "move_up": "ctrl+alt+up",
+    "scroll_down":"down",
+    "scroll_up":"up",
+    "tab_next" : "ctrl+shift+tab",
+    "tab_recent" : "ctrl+tab",
+    "new_line_above" : "esc+o",
+    "new_line_below" : "esc+shift+o"
+},
+  "onKey": ["PTT", "SHIFT", "ctrl+alt+up", "ctrl+alt+down", "ctrl+tab"],
+  "onKeySHIFT": ["PTT TOGGLE", "SHIFT", "esc+shift+o", "esc+o", "ctrl+shift+tab"]
+}
