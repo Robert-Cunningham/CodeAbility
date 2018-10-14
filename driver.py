@@ -1,10 +1,22 @@
 import voice_listener
 import english_to_python
 import keystrokes
+import serialFootPedalControl
+
 from os import system
 import time
 import re
 import keyboard
+
+lastFootState = False
+
+def onChange(state):
+    print('change', state)
+    #if state and not lastFootState:
+
+
+
+serialFootPedalControl.setPTTHook(onChange)
 
 def callback(text, final=False):
     #concat = ' '.join([x[0] for x in phrases])

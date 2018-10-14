@@ -1,6 +1,5 @@
 import serial
 import keyboard
-import time
 
 numPedals = 5
 
@@ -28,7 +27,7 @@ def setPTTHook(input_fn):
 shiftState = False
 PTTLockedState = False
 
-ser = serial.Serial("COM6", 9600)
+ser = serial.Serial("/dev/ttyACM0", 9600)
 
 while True:
     code=int(ser.readline())
