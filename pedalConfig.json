@@ -1,0 +1,33 @@
+{
+  "REFERENCE": {
+
+    "readMe": "Copy the hotkeys into each field of onKey and onKeySHIFT to allocate each action",
+    "readMe2": "Each element in the array is a pedal.",
+
+    "hotkeys": {
+      "move_down": "ctrl+alt+down",
+      "move_up": "ctrl+alt+up",
+      "scroll_down":"down",
+      "scroll_up":"up",
+      "tab_next" : "ctrl+shift+tab",
+      "tab_recent" : "ctrl+tab",
+      "new_line_above" : "esc+o",
+      "new_line_below" : "esc+shift+o"
+    },
+
+    "keywords": {
+      "PTT": "Momentarily Engages the PTT",
+      "PTT TOGGLE" : "Toggles PTT",
+      "SHIFT": "Momentarily Engages secondary functions"
+    },
+    "Ports": {
+        "Windows": "COM6",
+        "Linux": "/dev/ttyACM0"
+      },
+    "numPedals": 5
+},
+  "numPedals": 5,
+  "port":"COM6",
+  "onKey": ["PTT", "SHIFT", "down", "up", "ctrl+tab"],
+  "onKeySHIFT": ["PTT TOGGLE", "SHIFT", "esc+shift+o", "esc+o", "ctrl+shift+tab"]
+}
