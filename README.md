@@ -228,7 +228,7 @@ Down:
 Pushing Down moves the cursor down one line, and pressing Shift with Down inserts a new line below the cursor.
 
 Up:
-Pushing Up moves the cursor up one line,, and pressing Shift with Up inserts a new line aboe the cursor.
+Pushing Up moves the cursor up one line, and pressing Shift with Up inserts a new line above the cursor.
 
 Tab:
 Pushing Tab switches between the 2 most recent tabs, and pressing Shift with Tab allow you to cycle through all open tabs.
