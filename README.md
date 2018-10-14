@@ -18,9 +18,9 @@ Which will be parsed as
 
 
 ## User Guide
-If the program parse what you say straight into code, it will insert it into your file. Otherwise, there are specific voice commands that you can use for various operations. The program uses the NATO phonetic alphabet to say single letters, as not to confuse the speech to text algorithm.
+If the program parses what you say straight into code, it will insert it into your file. Otherwise, there are specific voice commands that you can use for various operations. The program uses the NATO phonetic alphabet to say single letters, so as not to confuse the speech to text algorithm.
 
-The specific commands are split into the following catagories:
+The specific commands are split into the following categories:
 
  - `Create [item]`: Creates an item such as a for loop, if statement etc
 	 - When creating an item, use the word "next" to jump to the next field
