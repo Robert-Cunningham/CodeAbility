@@ -13,6 +13,7 @@
 //Input pins
 const int num_pedals = 5;
 const int pedal_pins[] = {9, 10, 11, 12, 13};
+const int PTT_led_pin = 2;
 
 //previous states
 bool lastPedalStates[] = {LOW, LOW, LOW, LOW, LOW};
@@ -22,18 +23,19 @@ void setup() {
   for(pin:pedal_pins) {
     pinMode(pin, INPUT);
   }
+  pinMode(PTT_led_pin, OUTPUT);
 
   Serial.begin(9600);
 }
 
 void loop() {
-  //Read all the buttons
+  //Read all the pedals
   bool pedalStates[num_pedals];
-
   for(int i=0; i<num_pedals; i++) {
     pedalStates[i] = digitalRead(pedal_pins[i]);
   }
-  
+
+  //parse pedal states and send serial
   for(int i=0; i<num_pedals; i++) {
     if (pedalStates[i] != lastPedalStates[i]) {
       if (pedalStates[i] == HIGH) {
@@ -50,4 +52,14 @@ void loop() {
     lastPedalStates[i] = pedalStates[i];
   }
 
+  //listen for PTT led update
+  while(Serial.available() > 0 ) {
+    char c = Serial.read();
+    if ( c == 'o' ) {
+      digitalWrite(PTT_led_pin, HIGH);
+    }
+    else if (c == 'f') {
+      digitalWrite(PTT_led_pin, LOW);
+    }
+  }
 }

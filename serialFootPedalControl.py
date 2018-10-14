@@ -52,7 +52,7 @@ while True:
                 else: # if unlocked
                     print("Code: " + str(code) +" PTT ON!")
                     PTTHook(True) # send PTT on
-                    ser.write('o') #turn LED on
+                    ser.write(bytes(b'o')) #turn LED on
 
 
             elif onKey[code] == "SHIFT":
@@ -72,7 +72,7 @@ while True:
                 else: #if unlocked
                     print("Code: " + str(code) +" PTT OFF!")
                     PTTHook(False) # send PTT off
-                    ser.write('f')
+                    ser.write(bytes(b'f'))
 
             elif onKey[code-numPedals] == "SHIFT":
                 shiftState = False
@@ -97,12 +97,12 @@ while True:
                     PTTLockedState = False
                     PTTHook(False) #send PTT off
                     print("Code: " + str(code) +" PTT UNLOCKED AND OFF!")
-                    ser.write('f')
+                    ser.write(bytes(b'f'))
                 else: #if unlocked
                     PTTLockedState = True
                     PTTHook(True) #send PTT ON
                     print("Code: " + str(code) +" PTT LOCKED ON!")
-                    ser.write('o')
+                    ser.write(bytes(b'o'))
 
             elif onKeySHIFT[code] == "SHIFT":
                 shiftState = True
