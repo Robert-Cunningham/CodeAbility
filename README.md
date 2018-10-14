@@ -221,7 +221,7 @@ There are 5 foot pedals: PTT, Shift, Down, Up, and Tab.
 
 These are the default settings (configurable in pedalConfig.json):
 
-PTT:
+PTT (Push To Talk):
 When pushing PTT, the program begins listening for commands and processes any speech into formatted syntactic text. Letting go of PTT ends speech to text conversion. Holding Shift and then depressing PTT latches PTT, so that the program continues listening without continual depression of the PTT pedal. To disable PTT latch, press the PTT pedal (pressing Shift is not necessary).
 
 Down:
