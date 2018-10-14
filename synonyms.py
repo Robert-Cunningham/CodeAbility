@@ -38,8 +38,8 @@ raw_synonyms = {
    'x-ray':'x',
    'yankee':'y',
    'zulu':'z',
-   '+':'plus',
-   '-':'minus',
+   '[+]':'plus',
+   '[-]':'minus',
    'free':'three',
    'return to': 'return',
    'create 4': 'create for',
@@ -54,4 +54,5 @@ raw_synonyms = {
    'perimeter':'parameters'
 }
 
-synonyms = {("(^|[^A-Za-z])" + re.escape(k) + "([^A-Za-z]|$)"): " " + v + " " for (k, v) in raw_synonyms.items()}
+synonyms = {("(^|[^A-Za-z])" + k + "([^A-Za-z]|$)"): " " + v + " " for (k, v) in raw_synonyms.items()}
+print(synonyms)
