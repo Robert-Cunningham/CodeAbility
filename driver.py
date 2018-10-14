@@ -1,10 +1,23 @@
 import voice_listener
 import english_to_python
 import keystrokes
+#import serialFootPedalControl
+
 from os import system
 import time
 import re
 import keyboard
+
+useKeyboardInput = False
+lastFootState = False
+
+def onChange(state):
+    print('change', state)
+    #if state and not lastFootState:
+
+
+
+#serialFootPedalControl.setPTTHook(onChange)
 
 def callback(text, final=False):
     #concat = ' '.join([x[0] for x in phrases])
@@ -16,6 +29,10 @@ def callback(text, final=False):
     if not out:
         print("Failed.")
         return
+
+    if useKeyboardInput:
+        print("Executing keystrokes in 3 seconds.")
+        time.sleep(3)
 
     keystrokes.execute(out['command'], out['value'])
     #if out['command'] == 'code':
@@ -44,7 +61,12 @@ def callback(text, final=False):
 time.sleep(2)
 
 listener = voice_listener.Listener()
-listener.listen(50, callback)
+
+if useKeyboardInput:
+    listener.robert_input(callback)
+else:
+    listener.listen(50, callback)
+
 phrases = listener.getPhrases()
 
 #keyboard.press_and_release(r'shift+;')

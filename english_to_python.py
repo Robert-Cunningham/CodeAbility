@@ -89,7 +89,6 @@ class PythonTransformer(Transformer):
     
     
     def ifelse(self, items): #if (1) then (2) elif (3) then (4) elif (5) then (6) else (7)
-        print(items)
         out = ""
         ifpart = "if " + items[0] + ":\n" + items[1] + "\n"
 
@@ -99,10 +98,10 @@ class PythonTransformer(Transformer):
         elifCount = (len(items) - (2 + (1 if hasElse else 0))) // 2
 
         for i in range(elifCount):
-            out += "elif " + items[2*i + 2] + ":\n\t" + items[2*i + 2 + 1] + "\n"
+            out += "elif " + items[2*i + 2] + ":\n" + items[2*i + 2 + 1] + "\n"
         
         if hasElse:
-            out += "else:\n\t"  + items[-1] + "\n"
+            out += "else:\n"  + items[-1] + "\n"
         
         return out
     
@@ -114,10 +113,9 @@ class PythonTransformer(Transformer):
         args = items[1]
         body = items[2]
         
-        return "def " + fn + "(" + args + "):\n\t" + body
-
+        return "def " + fn + "(" + args + "):\n" + body
+    
     def array_comprehension(self, items):
-        print(items)
         return "[" + items[0] + " for " + items[1] + " in " + items[2] + " if " + items[3] + "]"
     
     def end_array_elements(self, items):
@@ -134,14 +132,35 @@ class PythonTransformer(Transformer):
     def previous_word(self, items):
         return "COMMAND previous_word"
 
+    def back(self, items):
+        return "COMMAND back"
+    
+    def create_for_loop(self, items):
+        return "CREATE for"
+
+    def create_for_range(self, items):
+        return "CREATE forr"
+
+    def create_if(self, items):
+        return "CREATE if"
+    
+    def next_(self, items):
+        return "NEXT " + items[0]
+
 def english_to_python(english):
     try:
+        #print(english)
         english = preprocess(english)
-        print('preprocessed', english)
         tree = parser.parse(english)
         #print(tree.pretty())
         out = PythonTransformer().transform(tree)
         print(out)
+        if "NEXT" in out:
+            out = out.replace("NEXT ", "")
+            return {'command': 'next', 'value': out}
+        if "CREATE" in out:
+            out = out.replace("CREATE ", "")
+            return {'command': 'create', 'value': out}
         if "COMMAND " in out:
             out = out.replace("COMMAND ", "")
             return {'command': out, 'value': ""}
@@ -220,6 +239,7 @@ def preprocess(s):
     s = s.lower()
     s = synonymize(s)
     s = s.replace("  ", " ").replace("  ", " ").replace("  ", " ")
+    s = s.strip()
     return s
 
-#print(english_to_python('next word'))
+print(english_to_python(fib))

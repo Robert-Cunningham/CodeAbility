@@ -2,6 +2,7 @@ from __future__ import division
 
 import re
 import sys
+import time
 
 from google.cloud import speech
 from google.cloud.speech import enums
@@ -151,18 +152,14 @@ class Listener:
 
 		return possibilities
 
-	def inputAsText(self, time):
+	def inputAsText(self, time, callback):
 		t = Timer(time, self.stopTimer)
 		t.start()
 		while(not self.stop):
 			self.phrases.append(input('>'))
-
-def main():
-	listener = Listener()
-	#listener.listen(15.0)
-	listener.inputAsText(15.0)
-	possibilities = listener.getPhrases(True)
-	print(possibilities)
-
-if __name__ =='__main__':
-	main()
+	
+	def robert_input(self, callback):
+		while(True):
+			#self.phrases.append(input('>'))
+			user_input = input('>')
+			callback(user_input)

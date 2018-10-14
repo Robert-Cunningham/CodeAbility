@@ -1,5 +1,7 @@
 ?start: statement
     | command
+    | create
+    | next_
 
 ?expression: int
     | quantity
@@ -75,9 +77,23 @@ int: NUMBER
 
 ?command: next_word
     | previous_word
+    | back
 
 ?next_word: "next word"
 ?previous_word: "previous word"
+
+?back: "backspace"
+
+?create: create_for_range
+    | create_if
+    | create_for_loop
+
+create_for_range: "create range"
+create_if: "create if"
+create_for_loop: "create loop"
+
+next_: expression " next"
+    | statement " next"
 
 %import common.NUMBER
 %import common.ESCAPED_STRING
