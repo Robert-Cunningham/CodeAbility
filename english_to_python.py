@@ -9,6 +9,7 @@
 from lark import Lark, Transformer
 import traceback
 import synonyms
+import re
 
 grammar = open('pythonicEnglish.lark').read()
 
@@ -16,7 +17,8 @@ parser = Lark(grammar, start='start', debug=True)
 
 def synonymize(text):
     for (k, v) in synonyms.synonyms.items():
-        text = text.replace(k, v)
+        text = re.sub(k, v, text)
+        #text = text.replace(k, v)
     return text.lower()
 
 def list_to_str(l):
@@ -129,12 +131,13 @@ class PythonTransformer(Transformer):
     def next_word(self, items):
         return "COMMAND next_word"
 
-    def last_word(self, items):
-        return "COMMAND last_word"
+    def previous_word(self, items):
+        return "COMMAND previous_word"
 
 def english_to_python(english):
     try:
         english = preprocess(english)
+        print('preprocessed', english)
         tree = parser.parse(english)
         #print(tree.pretty())
         out = PythonTransformer().transform(tree)
@@ -212,11 +215,11 @@ def q_sort(array):
 #def e(n=10):
 #    return sum(1 / float(math.factorial(i)) for i in range(n))
 
-def preprocess(str):
-    str = dump_newlines(str)
-    str = str.lower()
-    str = synonymize(str)
-    str = str.replace("  ", " ").replace("  ", " ").replace("  ", " ")
-    return str
+def preprocess(s):
+    s = dump_newlines(s)
+    s = s.lower()
+    s = synonymize(s)
+    s = s.replace("  ", " ").replace("  ", " ").replace("  ", " ")
+    return s
 
-#print(english_to_python(fib))
+#print(english_to_python('next word'))

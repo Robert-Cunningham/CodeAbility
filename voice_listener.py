@@ -89,7 +89,7 @@ class MicrophoneStream(object):
 			if not result.is_final:
 				#sys.stdout.write(transcript + overwrite_chars + '\r')
 				#sys.stdout.flush()
-				callback(transcript)
+				#callback(transcript)
 				num_chars_printed = len(transcript)
 			else:
 				#sys.stdout.write(transcript + overwrite_chars + '\r')
