@@ -1,4 +1,4 @@
-<p align="center"><img src="https://raw.githubusercontent.com/robert-cunningham/CodeAbility/master/codelogo.png" height="300"></align>
+<p align="center"><img src="https://github.com/Robert-Cunningham/CodeAbility/blob/master/Images/CodeAbility_Logo.png" height="300"></align>
 
 ## Summary
 Code-ability is a dictation tool especially for programmers. Most text to speech today is meant specifically to parse English, which makes it very hard to dictate code without saying something like
@@ -236,14 +236,12 @@ Shift:
 
 ## Images
 
-<p align="center"><img src="https://github.com/Robert-Cunningham/CodeAbility/blob/master/Images/codelogo.png" height="300"></align>
+<p align="center"><img src="https://github.com/Robert-Cunningham/CodeAbility/blob/master/Images/Cover_image.jpg" height="300"></align>
 
-<p align="center"><img src="https://github.com/Robert-Cunningham/CodeAbility/blob/master/Images/CodeAbility%20Image.jpg" height="300"></align>
+<p align="center"><img src="https://github.com/Robert-Cunningham/CodeAbility/blob/master/Images/top_pedal_design.png" height="300"></align>
 
-<p align="center"><img src="https://github.com/Robert-Cunningham/CodeAbility/blob/master/Images/Top_Scrn.png" height="300"></align>
-
-<p align="center"><img src="https://github.com/Robert-Cunningham/CodeAbility/blob/master/Images/Bottom_Scrn.png" height="300"></align>
+<p align="center"><img src="https://github.com/Robert-Cunningham/CodeAbility/blob/master/Images/Bottom_pedal_design.png" height="300"></align>
 
 <p align="center"><img src="https://github.com/Robert-Cunningham/CodeAbility/blob/master/Images/Schematic_Scrn.png" height="300"></align>
 
-<p align="center"><img src="https://github.com/Robert-Cunningham/CodeAbility/blob/master/Images/yes.jpg" height="300"></align>
+<p align="center"><img src="https://github.com/Robert-Cunningham/CodeAbility/blob/master/Images/Project_in_use.jpg" height="300"></align>
