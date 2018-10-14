@@ -105,7 +105,7 @@ teleport_word: "teleport to " word
 create_for_range: "create range"
 create_if: "create if"
 create_for_loop: "create loop"
-create_def: "create loop"
+create_def: "create function"
 create_else: "create else"
 
 next_: expression " next"
