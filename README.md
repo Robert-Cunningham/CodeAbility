@@ -1,4 +1,5 @@
-<img src="https://raw.githubusercontent.com/robert-cunningham/CodeAbility/master/codelogo.png" width="250" height="250">
+<center><img src="https://raw.githubusercontent.com/robert-cunningham/CodeAbility/master/codelogo.png" height="250"></center>
+
 ## Summary
 Code Dictate is a dictation tool especially for programmers. Most text to speech today is meant specifically to parse English, which makes it very hard to dictate code without saying something like
 
