@@ -45,7 +45,10 @@ raw_synonyms = {
    'next to': 'next',
    'ranch': 'range',
    '4 range': 'for range',
-   'four range': 'for range'
+   'four range': 'for range',
+   'the': '',
+   'when': 'if',
+   'find': 'define'
 }
 
 synonyms = {("(^|[^A-Za-z])" + re.escape(k) + "([^A-Za-z]|$)"): " " + v + " " for (k, v) in raw_synonyms.items()}
