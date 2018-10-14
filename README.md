@@ -194,7 +194,7 @@ You can do the following with the **jump to** and **goto** keywords:
 > back\
 > set test list to list of 0 and 1 and 2 and 8 and 13 and 17 and 19 and 32 and 42\
 > call print with result of call binary search with parameters test list and 3\
-> call print with result of call binary search with parameters test list and 13\
+> call print with result of call binary search with parameters test list and 13
 
 	  def binarySearch(list, item):
 	    first = 0
