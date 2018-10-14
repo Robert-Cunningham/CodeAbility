@@ -18,9 +18,9 @@ Which will be parsed as
 
 
 ## User Guide
-If the program parse what you say straight into code, it will insert it into your file. Otherwise, there are specific voice commands that you can use for various operations. The program uses the NATO phonetic alphabet to say single letters, as not to confuse the speech to text algorithm.
+If the program parses what you say straight into code, it will insert it into your file. Otherwise, there are specific voice commands that you can use for various operations. The program uses the NATO phonetic alphabet to say single letters, so as not to confuse the speech to text algorithm.
 
-The specific commands are split into the following catagories:
+The specific commands are split into the following categories:
 
  - `Create [item]`: Creates an item such as a for loop, if statement etc
 	 - When creating an item, use the word "next" to jump to the next field
@@ -81,7 +81,7 @@ You can do the following with the **jump to** and **goto** keywords:
 		- and
 		- pound
 		- carat
-		
+
 ## Line by Line Examples
 
 - return the result of the factorial of the quantity 5 plus the element at x plus y in myarray → `return factorial(5 + myArray[x + y])`
@@ -194,7 +194,7 @@ You can do the following with the **jump to** and **goto** keywords:
 > back\
 > set test list to list of 0 and 1 and 2 and 8 and 13 and 17 and 19 and 32 and 42\
 > call print with result of call binary search with parameters test list and 3\
-> call print with result of call binary search with parameters test list and 13\
+> call print with result of call binary search with parameters test list and 13
 
 	  def binarySearch(list, item):
 	    first = 0
@@ -216,3 +216,20 @@ You can do the following with the **jump to** and **goto** keywords:
 	  print(binarySearch(testlist),13)
 
 ## Hardware
+
+There are 5 foot pedals, and the default settings map the pedals to PTT, Shift, Down, Up, and Tab. Of course, these settings are configurable in pedalConfig.json.
+
+PTT (Push To Talk):
+When pushing PTT, the program begins listening for commands and processes any speech into formatted syntactic text. Letting go of PTT ends speech to text conversion. Holding Shift and then depressing PTT latches PTT, so that the program continues listening without continual depression of the PTT pedal. To disable PTT latch, press the PTT pedal (pressing Shift is not necessary).
+
+Down:
+Pushing Down moves the cursor down one line, and pressing Shift with Down inserts a new line below the cursor.
+
+Up:
+Pushing Up moves the cursor up one line, and pressing Shift with Up inserts a new line above the cursor.
+
+Tab:
+Pushing Tab switches between the 2 most recent tabs, and pressing Shift with Tab allow you to cycle through all open tabs.
+
+Shift:
+(Modifier key).
