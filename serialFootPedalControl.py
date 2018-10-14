@@ -1,9 +1,11 @@
-import serial
+import serial #from library PySerial
 import keyboard
 
 numPedals = 5
+windowsSerialPort = "COM6"
+linuxSerialPort = "/dev/ttyACM0"
 
-#json_data =
+#json_data!!
 scroll_down = 'ctrl+alt+up'
 scroll_up = 'ctrl+alt+down'
 tab_left = 'ctrl+shift+tab'
@@ -27,7 +29,8 @@ def setPTTHook(input_fn):
 shiftState = False
 PTTLockedState = False
 
-ser = serial.Serial("/dev/ttyACM0", 9600)
+ser = serial.Serial(windowsSerialPort, 9600)
+#ser = serial.Serial(linuxSerialPort, 9600)
 
 while True:
     code=int(ser.readline())
@@ -49,6 +52,7 @@ while True:
                 else: # if unlocked
                     print("Code: " + str(code) +" PTT ON!")
                     PTTHook(True) # send PTT on
+                    ser.write(bytes(b'o')) #turn LED on
 
 
             elif onKey[code] == "SHIFT":
@@ -68,6 +72,7 @@ while True:
                 else: #if unlocked
                     print("Code: " + str(code) +" PTT OFF!")
                     PTTHook(False) # send PTT off
+                    ser.write(bytes(b'f'))
 
             elif onKey[code-numPedals] == "SHIFT":
                 shiftState = False
@@ -91,11 +96,13 @@ while True:
                 if PTTLockedState:
                     PTTLockedState = False
                     PTTHook(False) #send PTT off
-                    print("Code: " + str(code) +" PTT LOCKED OFF!")
+                    print("Code: " + str(code) +" PTT UNLOCKED AND OFF!")
+                    ser.write(bytes(b'f'))
                 else: #if unlocked
                     PTTLockedState = True
                     PTTHook(True) #send PTT ON
                     print("Code: " + str(code) +" PTT LOCKED ON!")
+                    ser.write(bytes(b'o'))
 
             elif onKeySHIFT[code] == "SHIFT":
                 shiftState = True
