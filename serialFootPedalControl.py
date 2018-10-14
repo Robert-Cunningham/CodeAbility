@@ -1,23 +1,15 @@
 import serial #from library PySerial
 import keyboard
+import json
 
-numPedals = 5
-windowsSerialPort = "COM6"
-linuxSerialPort = "/dev/ttyACM0"
+configFile = open("pedalConfig.json").read()
+configData = json.loads(configFile)
 
-#json_data!!
-scroll_down = 'ctrl+alt+up'
-scroll_up = 'ctrl+alt+down'
-tab_next = 'ctrl+shift+tab'
-tab_recent = 'ctrl+tab'
-
-new_line_above = 'esc+o'
-new_line_below = 'esc+shift+o' 
+numPedals = configData["numPedals"]
 
 #press actions (order in array is index of pedal)
-
-onKey = ["PTT", "SHIFT", scroll_down, scroll_up, tab_recent]
-onKeySHIFT = ["PTT TOGGLE", "SHIFT", new_line_below, new_line_above, tab_next] #FIX THIS
+onKey = configData["onKey"]
+onKeySHIFT = configData["onKeySHIFT"]
 
 def PTTHook(a):
     pass
@@ -29,8 +21,7 @@ def setPTTHook(input_fn):
 shiftState = False
 PTTLockedState = False
 
-ser = serial.Serial(windowsSerialPort, 9600)
-#ser = serial.Serial(linuxSerialPort, 9600)
+ser = serial.Serial(configData["port"], 9600)
 
 while True:
     code=int(ser.readline())
