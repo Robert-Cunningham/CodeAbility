@@ -49,7 +49,7 @@ raw_synonyms = {
    'four range': 'for range',
    'the': '',
    'when': 'if',
-   'find': 'define'
+   'find': 'define',
    'parameter':'parameters',
    'perimeter':'parameters'
 }

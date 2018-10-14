@@ -116,6 +116,6 @@ def execute(command,input):
 
 time.sleep(2)
 #keyboard.write('a')
-for c in mydict:
-    execute(c[0],c[1])
+#for c in mydict:
+#    execute(c[0],c[1])
 
