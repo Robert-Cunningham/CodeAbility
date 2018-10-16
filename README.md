@@ -137,13 +137,13 @@ You can do the following with the **teleport to** and **goto** keywords:
 > return result of sort of smaller plus list of pivot plus result of sort of larger
 
     def q_sort(array):
-    if len(array) <= 1:
-    return array
-    else:
-    pivot = array[0]
-    larger = [ element for element in array[1:] if element > pivot ]
-    smaller = [ element for element in array[1:] if element <= pivot ]
-    return q_sort(smaller) + [pivot] + q_sort(larger)
+    	if len(array) <= 1:
+    		return array
+    	else:
+    		pivot = array[0]
+    		larger = [ element for element in array[1:] if element > pivot ]
+    		smaller = [ element for element in array[1:] if element <= pivot ]
+    		return q_sort(smaller) + [pivot] + q_sort(larger)
 
 > if num is greater than one then\
 > create for range\
