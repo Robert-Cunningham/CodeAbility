@@ -1,4 +1,4 @@
-<p align="center"><img src="https://github.com/Robert-Cunningham/CodeAbility/blob/master/Images/CodeAbility_Logo.png" height="300"></align>
+<p align="center"><img src="https://github.com/Robert-Cunningham/CodeAbility/blob/master/Images/CodeAbility_Logo.png" height="300"><br><i>Sanskriti Sharma, Lilia Heinold, Ian Richardson, Chris Zhu and Robert Cunningham<br>Winner of Best Overall and Best Documentation<br>HackUMass VI 2018</i></align>
 
 ## Summary
 Code-ability is a dictation tool especially for programmers. Most text to speech today is meant specifically to parse English, which makes it very hard to dictate code without saying something like
@@ -16,6 +16,7 @@ Which will be parsed as
     if(x == 5):
 	    # body
 
+Here is a [full demo video](https://youtu.be/aKf8mtaoPjI).
 
 ## User Guide
 If the program parses what you say straight into code, it will insert it into your file. Otherwise, there are specific voice commands that you can use for various operations. The program uses the NATO phonetic alphabet to say single letters, so as not to confuse the speech to text algorithm.
@@ -197,3 +198,6 @@ Shift:
 <p align="center"><img src="https://github.com/Robert-Cunningham/CodeAbility/blob/master/Images/Bottom_pedal_design.png" height="300"></align>
 
 <p align="center"><img src="https://github.com/Robert-Cunningham/CodeAbility/blob/master/Images/Schematic_Scrn.png" height="300"></align>
+
+### Notes
+Although this is a Hackathon project, this isn't the final version. We plan to continue development and testing; which includes code refactoring, adding new features and releasing the project fully with install instructions. 
