@@ -28,7 +28,7 @@ The specific commands are split into the following categories:
 - `Jump to [item] / goto [item]`: Goes to an item in the file, such as a line number, word or specific function
 - `Back`: A simple backspace
 - `Replace [word1] with [word2]`: Replace the next occurance of word1 with word2
-- `Define [name] with parameters [param1] and [param2] body`: Create a [name](param1, param2):
+- `Define [name] with parameters [param1] and [param2] body`: Create a function [name](param1, param2):
 
 ### Create keyword
 
@@ -56,7 +56,7 @@ You can do the following with the **teleport to** and **goto** keywords:
 - next word
 - last word / previous word
 
-### Callling functions
+### Calling functions
 - No parameters
 	- `call [function name]`
 - One parameter
